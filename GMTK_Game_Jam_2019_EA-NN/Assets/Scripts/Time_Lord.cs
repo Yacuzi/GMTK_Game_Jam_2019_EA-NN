@@ -15,6 +15,8 @@ public class Time_Lord : MonoBehaviour
 
     private static float timebender = 1;
 
+    private AudioSource Loading;
+
     //J'augmente mon compteur de temps
     private void Update_Time ()
     {
@@ -45,7 +47,7 @@ public class Time_Lord : MonoBehaviour
             Reset_Time();
 
             if (Acting)
-            {
+            {                
                 Acting = false;
                 Preparing = true;
                 Reset_Level();
@@ -56,9 +58,15 @@ public class Time_Lord : MonoBehaviour
             {
                 Preparing = false;
                 Acting = true;
+                Loading.Play(0);
                 return;
             }
         }
+    }
+
+    private void Start()
+    {
+        Loading = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

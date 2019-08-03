@@ -43,7 +43,7 @@ public class Character_Move : MonoBehaviour
 
     public void Reset_Character()
     {
-        transform.position = The_Level_Manager.Character_Pos[Level_Manager.Current_Level].position;
+        transform.position = The_Level_Manager.Character_Pos[Level_Manager.Current_Level].position + new Vector3(-0.329f, -0.336f, 0);
         GetComponent<BoxCollider2D>().enabled = true;
         Dead = false;
     }
