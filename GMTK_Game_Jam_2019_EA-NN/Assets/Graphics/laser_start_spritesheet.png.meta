@@ -55,8 +55,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 6
-  spritePivot: {x: 0, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -113,18 +113,18 @@ TextureImporter:
       name: laser_start_spritesheet_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 11
         y: 0
         width: 11
         height: 14
-      alignment: 6
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 33b23ff4284fd4920a4ab4acbc6bb354
+      spriteID: d18e807f423b749499f6cb8239c84f44
       internalID: -4751022015531894102
       vertices: []
       indices: 
@@ -134,18 +134,18 @@ TextureImporter:
       name: laser_start_spritesheet_1
       rect:
         serializedVersion: 2
-        x: 11
+        x: 22
         y: 0
         width: 11
         height: 14
-      alignment: 6
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 28bfd03c494924c05b35d01fb31d0380
+      spriteID: e5465ba22300847f890158acdd5cba4f
       internalID: 3708453284230045594
       vertices: []
       indices: 
@@ -155,18 +155,18 @@ TextureImporter:
       name: laser_start_spritesheet_2
       rect:
         serializedVersion: 2
-        x: 22
+        x: 33
         y: 0
         width: 11
         height: 14
-      alignment: 6
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fcfa78a98847c4db59fe6fb189672f97
+      spriteID: 107a8c1a993a046ea80287c8568196c3
       internalID: -2948172049567481026
       vertices: []
       indices: 
@@ -176,18 +176,18 @@ TextureImporter:
       name: laser_start_spritesheet_3
       rect:
         serializedVersion: 2
-        x: 33
+        x: 44
         y: 0
         width: 11
         height: 14
-      alignment: 6
+      alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9c1f1d2d4b8d94e249d54ac80ff3e00b
+      spriteID: 261ef34a61ae9480e8b7db74c927ee9b
       internalID: 5327886299670140838
       vertices: []
       indices: 

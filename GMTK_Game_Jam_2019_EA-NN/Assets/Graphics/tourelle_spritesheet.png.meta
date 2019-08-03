@@ -14,6 +14,9 @@ TextureImporter:
   - first:
       213: 902329761286142676
     second: tourelle_spritesheet_3
+  - first:
+      213: 4709917286047737012
+    second: tourelle_spritesheet_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -55,8 +58,8 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 6
-  spritePivot: {x: 0, y: 0}
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
@@ -117,14 +120,14 @@ TextureImporter:
         y: 0
         width: 11
         height: 23
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 539fe3ed9cb3b4d4eaa92cc806adeab2
+      spriteID: 06e96f81fca3a4024aadd9e6ff7a3b48
       internalID: -7421210235238505324
       vertices: []
       indices: 
@@ -138,14 +141,14 @@ TextureImporter:
         y: 0
         width: 11
         height: 23
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eab20046d88f24dde9eedc70a4c9b1e4
+      spriteID: 06a1651e719fe435a9c308a83ef5b6ec
       internalID: 6306745297177696574
       vertices: []
       indices: 
@@ -159,14 +162,14 @@ TextureImporter:
         y: 0
         width: 11
         height: 23
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2b14b666fc0e14cd6a7ea382ddd3c9d2
+      spriteID: 57707cca7bd104e9397e0cc2960d5f9c
       internalID: 1863526935665978969
       vertices: []
       indices: 
@@ -180,15 +183,36 @@ TextureImporter:
         y: 0
         width: 11
         height: 23
-      alignment: 6
-      pivot: {x: 0, y: 0}
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 50f4ff41be2b4419ebdd0e1e1cd1a36b
+      spriteID: 1ab81414b78a7402389566ca01610287
       internalID: 902329761286142676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tourelle_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 0
+        width: 11
+        height: 23
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf3b850d9fcde4308aa2c21b3d121cca
+      internalID: 4709917286047737012
       vertices: []
       indices: 
       edges: []
