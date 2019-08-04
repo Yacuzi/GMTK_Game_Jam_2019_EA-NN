@@ -72,7 +72,10 @@ public class Level_Manager : MonoBehaviour
 
     private void Update()
     {
-        if (myTransition)
+        if (The_Character.GetComponent<Character_Move>().debug && Input.GetKeyDown(KeyCode.Space))
+            Change_Level();
+
+            if (myTransition)
         {
             Transition();
         }

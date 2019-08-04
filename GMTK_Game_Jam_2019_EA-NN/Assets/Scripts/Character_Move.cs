@@ -20,7 +20,7 @@ public class Character_Move : MonoBehaviour
     //Character Move
     void Move ()
     {
-        if ((Time_Lord.Acting && !Dead) || debug)
+        if ((Time_Lord.Acting && !Dead))
         {
             if (Input.GetAxis("Vertical") != 0f)
             {

@@ -23531,6 +23531,11 @@ PrefabInstance:
       propertyPath: The_Level_Manager
       value: 
       objectReference: {fileID: 1422002788}
+    - target: {fileID: 8755737160067249847, guid: 729c5c07458344fb7924f1147678d289,
+        type: 3}
+      propertyPath: debug
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9157192598587371633, guid: 729c5c07458344fb7924f1147678d289,
         type: 3}
       propertyPath: m_RootOrder
