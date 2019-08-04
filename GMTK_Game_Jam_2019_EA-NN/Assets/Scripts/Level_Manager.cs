@@ -6,9 +6,8 @@ public class Level_Manager : MonoBehaviour
 {
     public static int Current_Level;
 
-    public Transform[] Character_Pos;
+    public Transform[] Character_Pos, exitPos;
     public GameObject[] Level_Content;
-    public Time_Lord theTimeLord;
 
     public GameObject The_Character;
     public GameObject MonMask;
@@ -24,7 +23,8 @@ public class Level_Manager : MonoBehaviour
         Current_Level++;
         Level_Content[Current_Level - 1].SetActive(false);
         Level_Content[Current_Level].SetActive(true);
-        The_Character.transform.position = Character_Pos[Current_Level].position;
+        The_Character.transform.position = Character_Pos[Current_Level].position + new Vector3(0.5f, 0.5f, 0);
+        The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
     }
 
     public void StartTransition()
