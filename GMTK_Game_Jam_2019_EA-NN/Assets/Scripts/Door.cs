@@ -7,8 +7,6 @@ public class Door : Resetables
     public bool StartOpen;
     private bool opened;
 
-    public Sprite Opened_Door, Closed_Door;
-
     private bool opened_ini;
 
     public Plate[] Linked_Plates;
@@ -34,33 +32,14 @@ public class Door : Resetables
 
     public void Open ()
     {
-        if (opened)
-        {
-            GetComponent<Animator>().SetBool("IsOpen", true);
-        }
-        else
-        {
-            GetComponent<Animator>().SetBool("IsOpen", false);
-        }
-    }
-
-    public void Openini()
-    {
-        if (opened)
-        {
-            GetComponent<SpriteRenderer>().sprite = Opened_Door;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().sprite = Closed_Door;
-        }
+        GetComponent<Animator>().SetBool("IsOpen", opened);
     }
 
     private void Start()
     {
         opened = StartOpen;
         opened_ini = opened;
-        Openini();
+        GetComponent<Animator>().SetBool("StartOpen", StartOpen);
     }
 
     private void Check_Opening ()

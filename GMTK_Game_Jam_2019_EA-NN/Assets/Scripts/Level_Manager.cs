@@ -31,7 +31,6 @@ public class Level_Manager : MonoBehaviour
     {
         myTransition = true;
         MonMask.transform.position = Character_Pos[Level_Manager.Current_Level+1].position + new Vector3(0.5f, 0.5f, 0);
-        Debug.Log(Character_Pos[Level_Manager.Current_Level + 1].position + new Vector3(0.5f, 0.5f, 0));
     }
 
     private void Transition()
