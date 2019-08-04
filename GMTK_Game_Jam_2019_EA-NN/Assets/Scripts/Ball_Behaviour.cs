@@ -9,19 +9,13 @@ public class Ball_Behaviour : Danger
 
     public Vector3 direction;
     private Vector3 pos_ini;
-    private int resetInt;
 
     public override void Reset()
     {
         base.Reset();
 
-        if (resetInt % 2 == 0)
-        {
-            speed = speed_ini;
-            transform.position = pos_ini;
-        }
-
-        resetInt++;
+        speed = speed_ini;
+        transform.position = pos_ini;
     }
 
     void Move_Ball()

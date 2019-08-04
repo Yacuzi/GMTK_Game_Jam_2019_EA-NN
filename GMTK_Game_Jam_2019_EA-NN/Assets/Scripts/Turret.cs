@@ -28,12 +28,9 @@ public class Turret : MonoBehaviour
 
     public void laserAnim()
     {
-        if (!characterRef.GetComponent<Character_Move>().Dead)
-        {
-            animTurret.Play("Turret_Fire", -1, 0f);
-            animLaser.Play("LaserStart_Fire", -1, 0f);
-            animEndLaser.Play("LaserEnd_Fire", -1, 0f);
-        }
+        animTurret.Play("Turret_Fire", -1, 0f);
+        animLaser.Play("LaserStart_Fire", -1, 0f);
+        animEndLaser.Play("LaserEnd_Fire", -1, 0f);
     }
 
     private void Start()

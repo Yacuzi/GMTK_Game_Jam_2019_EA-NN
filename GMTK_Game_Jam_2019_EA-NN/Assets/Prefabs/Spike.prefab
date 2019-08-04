@@ -97,7 +97,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartActivated: 1
-  theTimeLord: {fileID: 0}
 --- !u!95 &3022153558416033330
 Animator:
   serializedVersion: 3

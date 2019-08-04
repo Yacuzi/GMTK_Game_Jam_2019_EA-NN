@@ -14,9 +14,7 @@ public class Character_Move : MonoBehaviour
 
     public static Vector3 posExit;
 
-    private bool Ready, exiting;
-    [HideInInspector]
-    public bool Dead;
+    private bool Ready, Dead, exiting;
     private Animator CharaAnim;
 
     //Character Move
@@ -71,7 +69,6 @@ public class Character_Move : MonoBehaviour
     {
         Dead = true;
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<AudioSource>().Play();
         VFX.Play("VFXDeath_Die", -1, 0f);
         CharaAnim.Play("Blob_Death",-1,0f);
     }
