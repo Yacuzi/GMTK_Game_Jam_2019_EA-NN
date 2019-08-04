@@ -9,6 +9,8 @@ public class Spike : Danger
     private bool activated, anim_activation;
     private bool activated_ini, doOnce, doOnceAnim, doTwiceAnim;
 
+    public Time_Lord theTimeLord;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (activated)
@@ -59,6 +61,8 @@ public class Spike : Danger
 
     void Change_Sprite()
     {
+        theTimeLord.theSpikeSound(anim_activation);
+
         GetComponent<Animator>().SetBool("activated", anim_activation);
     }
 
