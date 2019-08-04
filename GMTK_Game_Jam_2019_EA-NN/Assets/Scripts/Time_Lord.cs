@@ -9,6 +9,8 @@ public class Time_Lord : MonoBehaviour
     public Level_Manager The_Level_Manager;
     public Turret theTurret;
 
+    public AudioSource spikeIn, spikeOut, ballSouns,tickSound,laserSound;
+
     public static float The_Timer;
 
     public static bool Acting = false;
@@ -16,8 +18,6 @@ public class Time_Lord : MonoBehaviour
     public static bool Transitioning = false, inTransition = false;
 
     private static float timebender = 1;
-
-    private AudioSource Loading;
 
     //J'augmente mon compteur de temps
     private void Update_Time ()
@@ -63,7 +63,6 @@ public class Time_Lord : MonoBehaviour
                 Preparing = false;
                 Acting = true;
                 Reset_Level();
-                Loading.Play(0);
                 return;
             }
             if (Transitioning)
@@ -75,9 +74,22 @@ public class Time_Lord : MonoBehaviour
         }
     }
 
+    public void theSpikeSound(bool activation)
+    {
+        if (activation)
+        {
+            if (!spikeIn.isPlaying)
+                spikeIn.Play();
+        }
+        else
+        {
+            if (!spikeOut.isPlaying)
+                spikeOut.Play();
+        }
+    }
+
     private void Start()
     {
-        Loading = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

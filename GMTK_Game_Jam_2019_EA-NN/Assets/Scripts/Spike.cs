@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spike : Danger
 {
     public bool StartActivated;
+    public Time_Lord theTimeLord;
 
     private bool activated, anim_activation;
     private bool activated_ini, doOnce, doOnceAnim, doTwiceAnim;
@@ -59,6 +60,8 @@ public class Spike : Danger
 
     void Change_Sprite()
     {
+        theTimeLord.theSpikeSound(anim_activation);
+
         GetComponent<Animator>().SetBool("activated", anim_activation);
     }
 

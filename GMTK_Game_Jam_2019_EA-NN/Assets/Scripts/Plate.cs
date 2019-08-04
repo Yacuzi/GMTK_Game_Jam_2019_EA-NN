@@ -15,6 +15,7 @@ public class Plate : Resetables
         if (collision.gameObject.CompareTag("Player") && !activated)
         {
             activated = true;
+            GetComponent<AudioSource>().Play();
             Activate();
         }
     }
