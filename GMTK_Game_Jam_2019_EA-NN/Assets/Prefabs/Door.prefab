@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1d541c2d7b04a4ba6f728ab709571c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opened: 1
+  StartOpen: 1
   Opened_Door: {fileID: 21300000, guid: d149c5474073d41eb88312bd9ab84b9e, type: 3}
   Closed_Door: {fileID: -7536564430545932361, guid: 514e2b03043a84140bb274008200bb93,
     type: 3}

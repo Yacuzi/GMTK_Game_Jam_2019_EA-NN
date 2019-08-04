@@ -3494,6 +3494,11 @@ PrefabInstance:
       propertyPath: The_Level_Manager
       value: 
       objectReference: {fileID: 1422002788}
+    - target: {fileID: 9195952560384571191, guid: 85f3248fc039e48469060c80f35e5a88,
+        type: 3}
+      propertyPath: StartOpen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f3248fc039e48469060c80f35e5a88, type: 3}
 --- !u!4 &1173235221 stripped
@@ -4522,6 +4527,11 @@ PrefabInstance:
       propertyPath: The_Level_Manager
       value: 
       objectReference: {fileID: 1422002788}
+    - target: {fileID: 9195952560384571191, guid: 85f3248fc039e48469060c80f35e5a88,
+        type: 3}
+      propertyPath: StartOpen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f3248fc039e48469060c80f35e5a88, type: 3}
 --- !u!4 &1525907304 stripped
@@ -4968,6 +4978,11 @@ PrefabInstance:
       propertyPath: The_Level_Manager
       value: 
       objectReference: {fileID: 1422002788}
+    - target: {fileID: 9195952560384571191, guid: 85f3248fc039e48469060c80f35e5a88,
+        type: 3}
+      propertyPath: StartOpen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f3248fc039e48469060c80f35e5a88, type: 3}
 --- !u!4 &1667832692 stripped
@@ -5664,6 +5679,11 @@ PrefabInstance:
       propertyPath: The_Level_Manager
       value: 
       objectReference: {fileID: 1422002788}
+    - target: {fileID: 9195952560384571191, guid: 85f3248fc039e48469060c80f35e5a88,
+        type: 3}
+      propertyPath: StartOpen
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f3248fc039e48469060c80f35e5a88, type: 3}
 --- !u!4 &1800093312 stripped

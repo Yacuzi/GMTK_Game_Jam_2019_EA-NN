@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Door : Resetables
 {
-    public bool opened;
+    public bool StartOpen;
+    private bool opened;
 
     public Sprite Opened_Door, Closed_Door;
 
@@ -27,10 +28,23 @@ public class Door : Resetables
         base.Reset();
 
         opened = opened_ini;
-        Open();
+        if (!StartOpen)
+            Open();
     }
 
     public void Open ()
+    {
+        if (opened)
+        {
+            GetComponent<Animator>().SetBool("IsOpen", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("IsOpen", false);
+        }
+    }
+
+    public void Openini()
     {
         if (opened)
         {
@@ -44,8 +58,9 @@ public class Door : Resetables
 
     private void Start()
     {
+        opened = StartOpen;
         opened_ini = opened;
-        Open();
+        Openini();
     }
 
     private void Check_Opening ()
@@ -62,6 +77,7 @@ public class Door : Resetables
 
     private void Update()
     {
-        Check_Opening();
+        if (!StartOpen)
+            Check_Opening();
     }
 }
