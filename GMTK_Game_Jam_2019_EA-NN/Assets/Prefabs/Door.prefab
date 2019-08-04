@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9195952560384571192}
   - component: {fileID: 9195952560384571191}
   - component: {fileID: 8236376292375149419}
+  - component: {fileID: 4818536636651086717}
   m_Layer: 9
   m_Name: Door
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.27, y: 0.27}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,7 +97,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   opened: 1
   Opened_Door: {fileID: 21300000, guid: d149c5474073d41eb88312bd9ab84b9e, type: 3}
-  Closed_Door: {fileID: 21300000, guid: d149c5474073d41eb88312bd9ab84b9e, type: 3}
+  Closed_Door: {fileID: -7536564430545932361, guid: 514e2b03043a84140bb274008200bb93,
+    type: 3}
   Linked_Plates: []
   The_Level_Manager: {fileID: 0}
 --- !u!61 &8236376292375149419
@@ -117,7 +119,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
     oldSize: {x: 0.27, y: 0.27}
-    newSize: {x: 1, y: 1}
+    newSize: {x: 0.27, y: 0.27}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
@@ -125,3 +127,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.27005202, y: 0.27007675}
   m_EdgeRadius: 0
+--- !u!95 &4818536636651086717
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9195952560384571189}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30def7bb49ea94078902f0ba1dfb67ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
