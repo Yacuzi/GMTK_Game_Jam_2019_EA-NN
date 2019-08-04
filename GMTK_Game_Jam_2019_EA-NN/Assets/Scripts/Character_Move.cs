@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character_Move : MonoBehaviour
 {
     public Level_Manager The_Level_Manager;
+    public Time_Lord theTimeLord;
     public Animator VFX;
 
     public float speed;
@@ -19,10 +20,12 @@ public class Character_Move : MonoBehaviour
     public bool Dead;
     private Animator CharaAnim;
 
+    public AudioSource soundEnter;
+
     //Character Move
     void Move ()
     {
-        if ((Time_Lord.Acting && !Dead))
+        if ((Time_Lord.Acting && !Dead) || Level_Manager.Current_Level == 19)
         {
             if (Input.GetAxis("Vertical") != 0f)
             {
@@ -96,6 +99,7 @@ public class Character_Move : MonoBehaviour
     {
         if (Ready && Time_Lord.Preparing && Time_Lord.Preparing && Time_Lord.The_Timer >= 0.5f)
         {
+            soundEnter.PlayDelayed(0.2f);
             CharaAnim.Play("Blob_Enter", -1, 0f);
             Ready = false;
             Dead = false;
@@ -104,17 +108,20 @@ public class Character_Move : MonoBehaviour
 
     void moveToGutter()
     {
-        if (Time_Lord.Transitioning)
-        {
-            transform.position = Vector3.Lerp(transform.position, The_Level_Manager.exitPos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0), Time_Lord.The_Timer);
-            if (!exiting)
+            if (Time_Lord.Transitioning)
             {
-                exiting = true;
-                CharaAnim.Play("Blob_Exit", -1, 0f);
+                if (theTimeLord.timebender == 1)
+                           transform.position = Vector3.Lerp(transform.position, The_Level_Manager.exitPos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0), Time_Lord.The_Timer);
+                
+                if (!exiting)
+                {
+                    exiting = true;
+                    CharaAnim.Play("Blob_Exit", -1, 0f);
+
+                }
             }
-        }
-        else
-            exiting = false;
+            else
+                exiting = false;
     }
 
     private void Start()

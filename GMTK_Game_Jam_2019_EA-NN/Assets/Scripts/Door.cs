@@ -12,12 +12,16 @@ public class Door : Resetables
     public Plate[] Linked_Plates;
     public Level_Manager The_Level_Manager;
 
+    public AudioSource soundExit, soundTransition;
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player") && opened)
         {
             Time_Lord.Acting = false;
             Time_Lord.Transitioning = true;
+            soundExit.Play();
+            soundTransition.PlayDelayed(0.7f);
         }
     }
 

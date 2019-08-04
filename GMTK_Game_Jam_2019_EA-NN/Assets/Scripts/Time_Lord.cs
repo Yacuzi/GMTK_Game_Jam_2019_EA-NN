@@ -17,7 +17,9 @@ public class Time_Lord : MonoBehaviour
     public static bool Preparing = true;
     public static bool Transitioning = false, inTransition = false;
 
-    private static float timebender = 1;
+    public float timebender = 1;
+
+    public GameObject thebar;
 
     //J'augmente mon compteur de temps
     private void Update_Time ()
@@ -50,12 +52,14 @@ public class Time_Lord : MonoBehaviour
             Reset_Time();
 
             if (Acting)
-            {                
+            {
                 Acting = false;
                 Preparing = true;
                 Reset_Level();
                 theTurret.laserAnim();
+                laserSound.Play();
                 Character.Reset_Character();
+                thebar.SetActive(false);
                 return;
             }
             if (Preparing)
@@ -63,10 +67,13 @@ public class Time_Lord : MonoBehaviour
                 Preparing = false;
                 Acting = true;
                 Reset_Level();
+                thebar.transform.localScale = Vector3.zero;
+                thebar.SetActive(true);
                 return;
             }
             if (Transitioning)
             {
+                thebar.SetActive(false);
                 inTransition = true;
                 The_Level_Manager.StartTransition();
                 return;

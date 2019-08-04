@@ -105,6 +105,7 @@ MonoBehaviour:
   debug: 0
   Pos_Ini: {x: 0, y: 0, z: 0}
   Dead: 0
+  soundEnter: {fileID: 0}
 --- !u!61 &2419270845407243101
 BoxCollider2D:
   m_ObjectHideFlags: 0
