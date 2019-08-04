@@ -4,59 +4,77 @@ using UnityEngine;
 
 public class Spike : Danger
 {
-    public bool activated;
-    private bool activated_ini, doOnce;
+    public bool StartActivated;
 
-    public Sprite S_activated, S_deactivated;
+    private bool activated, anim_activation;
+    private bool activated_ini, doOnce, doOnceAnim, doTwiceAnim;
 
-    public override void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (activated)
         {
-            base.OnCollisionEnter2D(collision);
+            Debug.Log("Kill" + Time_Lord.The_Timer);
+            collision.gameObject.GetComponent<Character_Move>().Kill();
         }
+    }
+
+    public override void OnCollisionEnter2D(Collision2D collision)
+    {
+       
     }
 
     public override void Reset()
     {
         base.Reset();
-
+        
         activated = activated_ini;
+        anim_activation = activated_ini;
         Change_Sprite();
         doOnce = false;
+        doOnceAnim = false;
+        doTwiceAnim = false;
     }
 
     void Activation ()
     {
-        if (Time_Lord.The_Timer >= 0.5f && !doOnce)
+        if (Time_Lord.The_Timer >= 0.35f && !doOnceAnim)
+        {
+            doOnceAnim = true;
+            anim_activation = !anim_activation;
+            Change_Sprite();
+        }
+
+        if (Time_Lord.The_Timer >= 0.85f && !doTwiceAnim)
+        {
+            doOnceAnim = false;
+            doTwiceAnim = true;
+        }
+
+        if (Time_Lord.The_Timer >= 0.5f && Time_Lord.Acting && !doOnce)
         {
             doOnce = true;
             activated = !activated;
-            Change_Sprite();
         }
     }
 
     void Change_Sprite()
     {
-        if (activated)
-        {
-            GetComponent<SpriteRenderer>().sprite = S_activated;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().sprite = S_deactivated;
-        }
+        GetComponent<Animator>().SetBool("activated", anim_activation);
     }
 
     private void Start()
     {
+        activated = StartActivated;
+        anim_activation = activated;
         activated_ini = activated;
+
+        GetComponent<Animator>().SetBool("StartActivated", StartActivated);
         Change_Sprite();
     }
 
     private void Update()
     {
-        Activation(); 
+        Activation();
     }
 
 }

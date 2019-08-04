@@ -60,6 +60,7 @@ public class Time_Lord : MonoBehaviour
             {
                 Preparing = false;
                 Acting = true;
+                Reset_Level();
                 Loading.Play(0);
                 return;
             }
