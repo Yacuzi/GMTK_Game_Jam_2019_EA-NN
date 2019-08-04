@@ -76,7 +76,9 @@ public class Character_Move : MonoBehaviour
     public void Reset_Character()
     {
         if (!Dead)
+        {
             Kill();
+        }
     }
 
     public void resetPosChara()

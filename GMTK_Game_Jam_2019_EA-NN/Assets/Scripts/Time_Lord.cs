@@ -7,6 +7,7 @@ public class Time_Lord : MonoBehaviour
 
     public Character_Move Character;
     public Level_Manager The_Level_Manager;
+    public Turret theTurret;
 
     public static float The_Timer;
 
@@ -53,6 +54,7 @@ public class Time_Lord : MonoBehaviour
                 Acting = false;
                 Preparing = true;
                 Reset_Level();
+                theTurret.laserAnim();
                 Character.Reset_Character();
                 return;
             }
