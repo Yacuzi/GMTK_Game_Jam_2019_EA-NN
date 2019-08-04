@@ -12,6 +12,7 @@ public class Time_Lord : MonoBehaviour
 
     public static bool Acting = false;
     public static bool Preparing = true;
+    public static bool Transitioning = false, inTransition = false;
 
     private static float timebender = 1;
 
@@ -20,6 +21,7 @@ public class Time_Lord : MonoBehaviour
     //J'augmente mon compteur de temps
     private void Update_Time ()
     {
+        if (!inTransition)
             The_Timer += Time.deltaTime * timebender;
     }
 
@@ -59,6 +61,12 @@ public class Time_Lord : MonoBehaviour
                 Preparing = false;
                 Acting = true;
                 Loading.Play(0);
+                return;
+            }
+            if (Transitioning)
+            {
+                inTransition = true;
+                The_Level_Manager.StartTransition();
                 return;
             }
         }

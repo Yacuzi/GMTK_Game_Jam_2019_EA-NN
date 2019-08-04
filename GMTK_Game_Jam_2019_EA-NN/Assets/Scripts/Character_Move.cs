@@ -12,12 +12,6 @@ public class Character_Move : MonoBehaviour
 
     private bool Dead;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     //Character Move
     void Move ()
     {

@@ -17,8 +17,8 @@ public class Door : Resetables
     {
         if (collision.gameObject.CompareTag("Player") && opened)
         {
-            Level_Manager.Current_Level++;
-            The_Level_Manager.Change_Level();
+            Time_Lord.Acting = false;
+            Time_Lord.Transitioning = true;
         }
     }
 
