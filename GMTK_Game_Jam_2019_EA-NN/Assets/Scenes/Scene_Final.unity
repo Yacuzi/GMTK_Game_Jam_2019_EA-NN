@@ -50545,10 +50545,6 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1321948349, guid: 729c5c07458344fb7924f1147678d289, type: 3}
-      propertyPath: m_LinearDrag
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 729c5c07458344fb7924f1147678d289, type: 3}
 --- !u!4 &4233814768300568405 stripped

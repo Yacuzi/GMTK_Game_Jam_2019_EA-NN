@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1292413008328745983}
   - component: {fileID: 1292413008328745982}
   m_Layer: 0
-  m_Name: Walls
+  m_Name: Walls_Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6581,7 +6581,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 061d8b0cd500f4a0d982fdcaf26a5092, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
