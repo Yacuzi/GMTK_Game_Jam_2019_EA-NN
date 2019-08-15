@@ -5,7 +5,9 @@ using UnityEngine;
 public class Door : Resetables
 {
     public bool StartOpen;
-    private bool opened;
+    public AudioClip openClip, closeClip;
+
+    private bool opened, lastOpened;
 
     private bool opened_ini;
 
@@ -37,6 +39,18 @@ public class Door : Resetables
     public void Open ()
     {
         GetComponent<Animator>().SetBool("IsOpen", opened);
+
+        if (lastOpened != opened)
+        {
+            if (opened)
+                GetComponent<AudioSource>().clip = openClip;
+            else
+                GetComponent<AudioSource>().clip = closeClip;
+
+            GetComponent<AudioSource>().Play();
+        }
+
+        lastOpened = opened;
     }
 
     private void Start()

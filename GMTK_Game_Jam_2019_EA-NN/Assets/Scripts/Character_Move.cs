@@ -25,16 +25,18 @@ public class Character_Move : MonoBehaviour
     //Character Move
     void Move ()
     {
-        if ((Time_Lord.Acting && !dead) || Level_Manager.Current_Level == 19)
+        if ((Time_Lord.Acting && !dead))
         {
             if (Mathf.Abs(Input.GetAxis("Vertical")) >= 0.01f)
             {
-                transform.position += (speed * Time.fixedDeltaTime) * new Vector3(0, Input.GetAxis("Vertical"), 0);
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, speed * Input.GetAxis("Vertical")));
+                //transform.position += (speed * Time.fixedDeltaTime) * new Vector3(0, Input.GetAxis("Vertical"), 0);
             }
 
             if (Mathf.Abs(Input.GetAxis("Horizontal")) >= 0.01f)
             {
-                transform.position += (speed * Time.fixedDeltaTime) * new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(speed * Input.GetAxis("Horizontal"), 0));
+                //transform.position += (speed * Time.fixedDeltaTime) * new Vector3(Input.GetAxis("Horizontal"), 0, 0);
             }
         }
     }
@@ -73,8 +75,11 @@ public class Character_Move : MonoBehaviour
     public void Kill ()
     {
         dead = true;
-        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<AudioSource>().Play();
+
+        if (Time_Lord.timebender < 1.5f)
+            Time_Lord.timebender += 0.025f;
 
         VFX.Play("VFXDeath_Die", -1, 0f);
         CharaAnim.Play("Blob_Death",-1,0f);
@@ -92,7 +97,7 @@ public class Character_Move : MonoBehaviour
     public void resetPosChara()
     {
         transform.position = The_Level_Manager.Character_Pos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0);
-        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = true;
         Ready = true;
     }
     
@@ -111,8 +116,7 @@ public class Character_Move : MonoBehaviour
     {
             if (Time_Lord.Transitioning)
             {
-                if (theTimeLord.timebender == 1f)
-                           transform.position = Vector3.Lerp(transform.position, The_Level_Manager.exitPos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0), Time_Lord.The_Timer);
+                transform.position = Vector3.Lerp(transform.position, The_Level_Manager.exitPos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0), Time_Lord.The_Timer);
                 
                 if (!exiting)
                 {
@@ -132,7 +136,6 @@ public class Character_Move : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        Debug.Log(dead);
         Move();
         AnimBlob();
         Undead();

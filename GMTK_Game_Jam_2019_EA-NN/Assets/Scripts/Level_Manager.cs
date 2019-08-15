@@ -22,7 +22,7 @@ public class Level_Manager : MonoBehaviour
 
     public AudioSource soundEnter;
 
-    public GameObject HideTurret;
+    public SpriteRenderer HideTurret;
     public Time_Lord theTimeLord;
 
     public void Change_Level()
@@ -32,19 +32,24 @@ public class Level_Manager : MonoBehaviour
         Level_Content[Current_Level].SetActive(true);
         The_Character.transform.position = Character_Pos[Current_Level].position + new Vector3(0.5f, 0.5f, 0);
         soundEnter.PlayDelayed(1.2f);
+        The_Character.GetComponent<Character_Move>().dead = false;
         The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
+
+        if (Time_Lord.timebender > 1f)
+        {
+            Time_Lord.timebender -= 0.1f;
+        }
 
         if (Current_Level == 19)
         {
-            HideTurret.SetActive(false);
-            theTimeLord.timebender = 0;
+            HideTurret.enabled = false;
         }
     }
 
     public void StartTransition()
     {
         myTransition = true;
-        MonMask.transform.position = Character_Pos[Level_Manager.Current_Level+1].position + new Vector3(0.5f, 0.5f, 0);
+        MonMask.transform.position = Character_Pos[Level_Manager.Current_Level + 1].position + new Vector3(0.5f, 0.5f, 0);
     }
 
     public void Transition()
