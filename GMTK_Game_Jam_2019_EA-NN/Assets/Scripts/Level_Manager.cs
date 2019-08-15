@@ -14,7 +14,9 @@ public class Level_Manager : MonoBehaviour
 
     public float transitionTime;
 
-    private bool myTransition, transitionOut, changeOnce;
+    public static bool myTransition;
+
+    private bool transitionOut, changeOnce;
     private Vector3 mask_ini;
     private float transitionSize;
 
@@ -25,12 +27,12 @@ public class Level_Manager : MonoBehaviour
 
     public void Change_Level()
     {
-            Current_Level++;
-            Level_Content[Current_Level - 1].SetActive(false);
-            Level_Content[Current_Level].SetActive(true);
-            The_Character.transform.position = Character_Pos[Current_Level].position + new Vector3(0.5f, 0.5f, 0);
-            soundEnter.PlayDelayed(1.2f);
-            The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
+        Current_Level++;
+        Level_Content[Current_Level - 1].SetActive(false);
+        Level_Content[Current_Level].SetActive(true);
+        The_Character.transform.position = Character_Pos[Current_Level].position + new Vector3(0.5f, 0.5f, 0);
+        soundEnter.PlayDelayed(1.2f);
+        The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
 
         if (Current_Level == 19)
         {
@@ -45,15 +47,17 @@ public class Level_Manager : MonoBehaviour
         MonMask.transform.position = Character_Pos[Level_Manager.Current_Level+1].position + new Vector3(0.5f, 0.5f, 0);
     }
 
-    private void Transition()
+    public void Transition()
     {
         if (!transitionOut)
         {
-            if (transitionSize <= 1f)
-                transitionSize += Time.deltaTime / transitionTime;
+            if (Time_Lord.The_Timer <= 0.5f)
+                transitionSize = 2 * Time_Lord.The_Timer;
             else
             {
                 transitionSize = 1f;
+                Time_Lord.Transitioning = false;
+                Time_Lord.inTransition = false;
                 transitionOut = true;
             }
         }
@@ -65,21 +69,27 @@ public class Level_Manager : MonoBehaviour
                 Change_Level();
             }
 
-            if (transitionSize >= 0f)
-                transitionSize -= Time.deltaTime / transitionTime;
+            if (Time_Lord.The_Timer <= 1f)
+                transitionSize = 2 - (2 * Time_Lord.The_Timer);
             else
             {
                 transitionSize = 0f;
                 transitionOut = false;
                 myTransition = false;
                 changeOnce = false;
-                Time_Lord.Transitioning = false;
-                Time_Lord.inTransition = false;
+                theTimeLord.Reset_Level();
                 Time_Lord.Preparing = true;
+                Time_Lord.The_Timer = 0f;
             }
         }
 
         MonMask.transform.localScale = Vector3.Lerp(mask_ini, Vector3.zero, transitionSize);
+    }
+
+    private void Start()
+    {
+        mask_ini = MonMask.transform.localScale;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -95,13 +105,6 @@ public class Level_Manager : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
-            Cursor.visible = false;
         }
     }
-
-    private void Start()
-    {
-        mask_ini = MonMask.transform.localScale;
-    }
-
 }

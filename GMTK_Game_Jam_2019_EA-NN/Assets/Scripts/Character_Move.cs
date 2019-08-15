@@ -17,7 +17,7 @@ public class Character_Move : MonoBehaviour
 
     private bool Ready, exiting;
     [HideInInspector]
-    public bool Dead;
+    public bool dead;
     private Animator CharaAnim;
 
     public AudioSource soundEnter;
@@ -25,14 +25,14 @@ public class Character_Move : MonoBehaviour
     //Character Move
     void Move ()
     {
-        if ((Time_Lord.Acting && !Dead) || Level_Manager.Current_Level == 19)
+        if ((Time_Lord.Acting && !dead) || Level_Manager.Current_Level == 19)
         {
-            if (Input.GetAxis("Vertical") != 0f)
+            if (Mathf.Abs(Input.GetAxis("Vertical")) >= 0.01f)
             {
                 transform.position += (speed * Time.fixedDeltaTime) * new Vector3(0, Input.GetAxis("Vertical"), 0);
             }
 
-            if (Input.GetAxis("Horizontal") != 0f)
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) >= 0.01f)
             {
                 transform.position += (speed * Time.fixedDeltaTime) * new Vector3(Input.GetAxis("Horizontal"), 0, 0);
             }
@@ -41,7 +41,7 @@ public class Character_Move : MonoBehaviour
 
     void AnimBlob()
     {
-        if (Time_Lord.Acting && !Time_Lord.Transitioning && !Dead)
+        if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead)
         {
             bool up = false, left = false, down = false, right = false;
 
@@ -72,7 +72,7 @@ public class Character_Move : MonoBehaviour
 
     public void Kill ()
     {
-        Dead = true;
+        dead = true;
         GetComponent<BoxCollider2D>().enabled = false;
         GetComponent<AudioSource>().Play();
 
@@ -82,27 +82,28 @@ public class Character_Move : MonoBehaviour
 
     public void Reset_Character()
     {
-        if (!Dead)
+        if (!dead)
         {
             Kill();
         }
     }
 
+    //Called by animation
     public void resetPosChara()
     {
         transform.position = The_Level_Manager.Character_Pos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0);
         GetComponent<BoxCollider2D>().enabled = true;
         Ready = true;
     }
-
+    
     void Undead()
     {
-        if (Ready && Time_Lord.Preparing && Time_Lord.Preparing && Time_Lord.The_Timer >= 0.5f)
+        if (Ready && Time_Lord.Preparing && Time_Lord.The_Timer >= 0.5f)
         {
             soundEnter.PlayDelayed(0.2f);
             CharaAnim.Play("Blob_Enter", -1, 0f);
             Ready = false;
-            Dead = false;
+            dead = false;
         }
     }
 
@@ -110,14 +111,13 @@ public class Character_Move : MonoBehaviour
     {
             if (Time_Lord.Transitioning)
             {
-                if (theTimeLord.timebender == 1)
+                if (theTimeLord.timebender == 1f)
                            transform.position = Vector3.Lerp(transform.position, The_Level_Manager.exitPos[Level_Manager.Current_Level].position + new Vector3(0.5f, 0.5f, 0), Time_Lord.The_Timer);
                 
                 if (!exiting)
                 {
                     exiting = true;
                     CharaAnim.Play("Blob_Exit", -1, 0f);
-
                 }
             }
             else
@@ -132,6 +132,7 @@ public class Character_Move : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        Debug.Log(dead);
         Move();
         AnimBlob();
         Undead();

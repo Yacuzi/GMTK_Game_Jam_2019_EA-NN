@@ -15,7 +15,6 @@ public class Spike : Danger
     {
         if (activated)
         {
-            Debug.Log("Kill" + Time_Lord.The_Timer);
             collision.gameObject.GetComponent<Character_Move>().Kill();
         }
     }
@@ -28,10 +27,8 @@ public class Spike : Danger
     public override void Reset()
     {
         base.Reset();
-        
         activated = activated_ini;
         anim_activation = activated_ini;
-        Change_Sprite();
         doOnce = false;
         doOnceAnim = false;
         doTwiceAnim = false;
@@ -39,20 +36,22 @@ public class Spike : Danger
 
     void Activation ()
     {
-        if (Time_Lord.The_Timer >= 0.35f && !doOnceAnim)
+        if (Time_Lord.The_Timer >= 0.85f && !doOnceAnim)
         {
             doOnceAnim = true;
             anim_activation = !anim_activation;
             Change_Sprite();
         }
 
-        if (Time_Lord.The_Timer >= 0.85f && !doTwiceAnim)
+        else if (Time_Lord.The_Timer >= 0.35f && !doTwiceAnim && !Level_Manager.myTransition)
         {
-            doOnceAnim = false;
+
             doTwiceAnim = true;
+            anim_activation = !anim_activation;
+            Change_Sprite();
         }
 
-        if (Time_Lord.The_Timer >= 0.5f && Time_Lord.Acting && !doOnce)
+        if (Time_Lord.The_Timer >= 0.5f && !doOnce)
         {
             doOnce = true;
             activated = !activated;
@@ -69,11 +68,10 @@ public class Spike : Danger
     private void Start()
     {
         activated = StartActivated;
-        anim_activation = activated;
+        anim_activation = !activated;
         activated_ini = activated;
 
-        GetComponent<Animator>().SetBool("StartActivated", StartActivated);
-        Change_Sprite();
+        GetComponent<Animator>().SetBool("StartActivated", !StartActivated);
     }
 
     private void Update()

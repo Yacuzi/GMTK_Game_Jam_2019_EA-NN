@@ -8,7 +8,8 @@ public class Loading_Bar : MonoBehaviour
 
     void Change_Scale()
     {
-        transform.localScale = new Vector3(Time_Lord.The_Timer * scale_ini.x, scale_ini.y, scale_ini.z);
+        if (Time_Lord.Acting)
+            transform.localScale = new Vector3(Time_Lord.The_Timer * scale_ini.x, scale_ini.y, scale_ini.z);
     }
 
     private void Start()

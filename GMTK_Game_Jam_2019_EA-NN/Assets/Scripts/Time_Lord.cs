@@ -22,10 +22,9 @@ public class Time_Lord : MonoBehaviour
     public GameObject thebar;
 
     //J'augmente mon compteur de temps
-    private void Update_Time ()
+    private void Update_Time()
     {
-        if (!inTransition)
-            The_Timer += Time.deltaTime * timebender;
+        The_Timer += Time.deltaTime * timebender;
     }
 
     //Je reset le timer
@@ -34,7 +33,7 @@ public class Time_Lord : MonoBehaviour
         The_Timer = 0;
     }
 
-    void Reset_Level()
+    public void Reset_Level()
     {
         Resetables[] the_resets = The_Level_Manager.Level_Content[Level_Manager.Current_Level].GetComponentsInChildren<Resetables>();
 
@@ -46,24 +45,26 @@ public class Time_Lord : MonoBehaviour
 
     private void Tick ()
     {
+        //Debug.Log(The_Timer + " Acting " + Acting + " Preparing " + Preparing + " Transitioning " + Transitioning);
         //Si je suis pas en train de reset la salle et que le temps est supérieur à 1 seconde
         if (The_Timer >= 1f)
         {
-            Reset_Time();
-
             if (Acting)
             {
+                Reset_Time();
                 Acting = false;
                 Preparing = true;
                 Reset_Level();
                 theTurret.laserAnim();
-                laserSound.Play();
+                if (!Character.dead)
+                    laserSound.Play();
                 Character.Reset_Character();
                 thebar.SetActive(false);
                 return;
             }
             if (Preparing)
             {
+                Reset_Time();
                 Preparing = false;
                 Acting = true;
                 Reset_Level();
@@ -73,6 +74,7 @@ public class Time_Lord : MonoBehaviour
             }
             if (Transitioning)
             {
+                Reset_Time();
                 thebar.SetActive(false);
                 inTransition = true;
                 The_Level_Manager.StartTransition();

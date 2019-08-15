@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class Ball_Behaviour : Danger
 {
-    public float speed;
-    private float speed_ini;
+    public Transform from, to;
 
-    public Vector3 direction;
     private Vector3 pos_ini;
     private int resetInt;
-
 
     public override void Reset()
     {
@@ -18,7 +15,6 @@ public class Ball_Behaviour : Danger
 
         if (resetInt % 2 == 0)
         {
-            speed = speed_ini;
             transform.position = pos_ini;
         }
 
@@ -27,19 +23,26 @@ public class Ball_Behaviour : Danger
 
     void Move_Ball()
     {
-        transform.position += speed * Time.deltaTime * Vector3.Normalize(direction);
+        float progression = 2 * (Time_Lord.The_Timer + (Vector3.Distance(from.position, pos_ini) / (2 * Vector3.Distance(from.position, to.position))));
+
+        if (progression % 2 < 1)
+        {
+            transform.position = Vector3.Lerp(from.position,to.position,progression % 1);
+        }
+        else
+        {
+            transform.position = Vector3.Lerp(from.position, to.position, 1 - (progression % 1));
+        }
+
     }
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
-
-        speed = -speed;
     }
 
     void Start()
     {
-        speed_ini = speed;
         pos_ini = transform.position;
     }
 

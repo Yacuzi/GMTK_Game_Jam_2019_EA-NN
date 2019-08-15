@@ -8,7 +8,6 @@ public class Danger : Resetables
     {
         if (collision.gameObject.GetComponent<Character_Move>())
         {
-            Debug.Log("Kill");
             collision.gameObject.GetComponent<Character_Move>().Kill();
         }
     }
