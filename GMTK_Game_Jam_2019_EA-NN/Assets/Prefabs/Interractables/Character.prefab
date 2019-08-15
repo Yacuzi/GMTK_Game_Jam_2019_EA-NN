@@ -102,7 +102,7 @@ MonoBehaviour:
   The_Level_Manager: {fileID: 0}
   theTimeLord: {fileID: 0}
   VFX: {fileID: 1807547327332949719}
-  speed: 16
+  speed: 200
   debug: 0
   Pos_Ini: {x: 0, y: 0, z: 0}
   dead: 0
