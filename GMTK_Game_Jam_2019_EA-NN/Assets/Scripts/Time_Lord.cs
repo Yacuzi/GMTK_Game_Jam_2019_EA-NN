@@ -8,6 +8,7 @@ public class Time_Lord : MonoBehaviour
     public Character_Move Character;
     public Level_Manager The_Level_Manager;
     public Turret theTurret;
+    public bool IntroTime_Lord;
 
     public static float The_Timer;
 
@@ -108,12 +109,21 @@ public class Time_Lord : MonoBehaviour
 
     private void Start()
     {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        Update_Time();
-        Tick();
+        if (IntroTime_Lord)
+        {
+            Acting = true;
+        }
+
+        if (!IntroTime_Lord)
+        {
+            Update_Time();
+            Tick();
+        }
     }
 }

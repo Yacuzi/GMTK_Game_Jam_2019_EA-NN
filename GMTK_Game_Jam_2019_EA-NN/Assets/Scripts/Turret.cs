@@ -5,9 +5,13 @@ using UnityEngine;
 public class Turret : MonoBehaviour
 {
     public Transform characterRef;
+    public bool isIntroTurret;
+    public AudioSource laserSound;
     public float rotSpeed;
     public Transform laserStart, laserEnd, laserEndPos;
     public float facCorrecScale;
+
+    private bool playOnce;
 
     private Animator animTurret, animLaser, animEndLaser;
 
@@ -28,12 +32,22 @@ public class Turret : MonoBehaviour
 
     public void laserAnim()
     {
-        if (!characterRef.GetComponent<Character_Move>().dead)
+        if (!isIntroTurret)
         {
+            if (!characterRef.GetComponent<Character_Move>().dead)
+            {
+                animTurret.Play("Turret_Fire", -1, 0f);
+                animLaser.Play("LaserStart_Fire", -1, 0f);
+                animEndLaser.Play("LaserEnd_Fire", -1, 0f);
+            }
+        }
+    }
+
+    public void laserAnimIntro()
+    {
             animTurret.Play("Turret_Fire", -1, 0f);
             animLaser.Play("LaserStart_Fire", -1, 0f);
             animEndLaser.Play("LaserEnd_Fire", -1, 0f);
-        }
     }
 
     private void Start()
@@ -45,6 +59,21 @@ public class Turret : MonoBehaviour
 
     private void Update()
     {
+        if (isIntroTurret)
+        {
+            if ((int)Time.time % 5 == 4 && !playOnce)
+            {
+                playOnce = true;
+                laserAnimIntro();
+                laserSound.Play();
+            }
+
+            if ((int)Time.time % 5 == 2)
+            {
+                playOnce = false;
+            }
+        }
+
         laserLength();
         rotateLaser();
     }
