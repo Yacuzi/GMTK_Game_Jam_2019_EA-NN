@@ -61,14 +61,14 @@ public class Turret : MonoBehaviour
     {
         if (isIntroTurret)
         {
-            if ((int)Time.time % 5 == 4 && !playOnce)
+            if ((int)Time.time % 5 == 2 && !playOnce)
             {
                 playOnce = true;
                 laserAnimIntro();
                 laserSound.Play();
             }
 
-            if ((int)Time.time % 5 == 2)
+            if ((int)Time.time % 5 == 4)
             {
                 playOnce = false;
             }

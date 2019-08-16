@@ -14,6 +14,7 @@ public class Loading_Bar : MonoBehaviour
 
     private void Start()
     {
+        this.gameObject.SetActive(false);
         scale_ini = transform.localScale;
         transform.localScale = Vector3.zero;
     }
@@ -21,6 +22,6 @@ public class Loading_Bar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Change_Scale();        
+        Change_Scale();     
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Level_Manager : MonoBehaviour
 {
     public static int Current_Level;
+    public static bool myTransition;
 
     public Transform[] Character_Pos, exitPos;
     public GameObject[] Level_Content;
@@ -14,7 +16,6 @@ public class Level_Manager : MonoBehaviour
 
     public float transitionTime;
 
-    public static bool myTransition;
 
     private bool transitionOut, changeOnce;
     private Vector3 mask_ini;
@@ -25,15 +26,36 @@ public class Level_Manager : MonoBehaviour
     public SpriteRenderer HideTurret;
     public Time_Lord theTimeLord;
 
+    public AudioSource transitionSound;
+
+    private bool loadMyScene;
+
+    public void resetStatic()
+    {
+        Level_Manager.Current_Level = 0;
+        Level_Manager.myTransition = false;
+
+        Time_Lord.Acting = false;
+        Time_Lord.Preparing = true;
+        Time_Lord.Transitioning = false;
+        Time_Lord.timebender = 1f;
+        Time_Lord.inTransition = false;
+        Time_Lord.The_Timer = 0f;
+    }
+
     public void Change_Level()
     {
         Current_Level++;
         Level_Content[Current_Level - 1].SetActive(false);
         Level_Content[Current_Level].SetActive(true);
         The_Character.transform.position = Character_Pos[Current_Level].position + new Vector3(0.5f, 0.5f, 0);
-        soundEnter.PlayDelayed(1.2f);
         The_Character.GetComponent<Character_Move>().dead = false;
-        The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
+
+        if ((theTimeLord.IntroTime_Lord && Current_Level != 2) || !theTimeLord.IntroTime_Lord)
+        {
+            The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
+            soundEnter.PlayDelayed(1.2f);
+        }
 
         The_Character.GetComponent<Character_Move>().ejectTrail();
         Destroy(The_Character.GetComponent<Character_Move>().currentTrail);
@@ -90,10 +112,22 @@ public class Level_Manager : MonoBehaviour
                 theTimeLord.Reset_Level();
                 Time_Lord.Preparing = true;
                 Time_Lord.The_Timer = 0f;
+
+                if (theTimeLord.IntroTime_Lord && Level_Manager.Current_Level == 2)
+                {
+                    loadMyScene = true;
+                }
             }
         }
 
         MonMask.transform.localScale = Vector3.Lerp(mask_ini, Vector3.zero, transitionSize);
+    }
+
+    private void loadNewScene()
+    {
+        SceneManager.LoadScene(1);
+        resetStatic();
+        return;
     }
 
     private void Start()
@@ -104,6 +138,11 @@ public class Level_Manager : MonoBehaviour
 
     private void Update()
     {
+        if (loadMyScene && !transitionSound.isPlaying)
+        {
+            loadNewScene();
+        }
+
         if (The_Character.GetComponent<Character_Move>().debug && Input.GetKeyDown(KeyCode.Space))
             Change_Level();
 

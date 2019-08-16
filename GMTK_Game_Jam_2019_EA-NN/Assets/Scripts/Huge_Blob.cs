@@ -37,7 +37,7 @@ public class Huge_Blob : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((int)Time.time % 5 == 4 && !playOnce)
+        if ((int)Time.time % 5 == 2 && !playOnce)
         {
             GetComponent<AudioSource>().Play();
             playOnce = true;
@@ -45,7 +45,7 @@ public class Huge_Blob : MonoBehaviour
             GetComponent<Animator>().SetBool("Suffer", true);
         }
 
-        if ((int)Time.time % 5 == 2)
+        if ((int)Time.time % 5 == 4)
         {
             playOnce = false;
         }

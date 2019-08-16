@@ -50,7 +50,7 @@ public class Time_Lord : MonoBehaviour
         //Si je suis pas en train de reset la salle et que le temps est supérieur à 1 seconde
         if (The_Timer >= 1f)
         {
-            if (Acting)
+            if (Acting && !IntroTime_Lord)
             {
                 if (Level_Manager.Current_Level != 19)
                 {
@@ -85,7 +85,10 @@ public class Time_Lord : MonoBehaviour
             if (Transitioning)
             {
                 Reset_Time();
-                thebar.SetActive(false);
+                if (!IntroTime_Lord)
+                {
+                    thebar.SetActive(false);
+                }
                 inTransition = true;
                 The_Level_Manager.StartTransition();
                 return;
@@ -109,21 +112,16 @@ public class Time_Lord : MonoBehaviour
 
     private void Start()
     {
-
+        if (IntroTime_Lord)
+        {
+            Acting = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (IntroTime_Lord)
-        {
-            Acting = true;
-        }
-
-        if (!IntroTime_Lord)
-        {
-            Update_Time();
-            Tick();
-        }
+        Update_Time();
+        Tick();
     }
 }

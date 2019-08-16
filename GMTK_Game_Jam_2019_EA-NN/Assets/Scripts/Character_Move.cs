@@ -263,7 +263,7 @@ public class Character_Move : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = true;
         Ready = true;
     }
-    
+   
     void Undead()
     {
         if (Ready && Time_Lord.Preparing && Time_Lord.The_Timer >= 0.5f)
@@ -306,7 +306,10 @@ public class Character_Move : MonoBehaviour
     public void ejectTrail ()
     {
         if (currentTrail != null)
+        {
             currentTrail.transform.SetParent(null, true);
+            currentTrail.GetComponent<TrailRenderer>().autodestruct = true;
+        }
     }
 
     void moveToGutter()
@@ -330,6 +333,12 @@ public class Character_Move : MonoBehaviour
         CharaAnim = GetComponent<Animator>();
         cameraIni = Camera.main.transform.position;
         generateTrail();
+
+        if (!theTimeLord.IntroTime_Lord)
+        {
+            CharaAnim.Play("Blob_Enter");
+            soundEnter.PlayDelayed(0.2f);
+        }
     }
 
     // Update is called once per frame
