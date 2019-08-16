@@ -35,6 +35,11 @@ public class Level_Manager : MonoBehaviour
         The_Character.GetComponent<Character_Move>().dead = false;
         The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
 
+        The_Character.GetComponent<Character_Move>().ejectTrail();
+        Destroy(The_Character.GetComponent<Character_Move>().currentTrail);
+
+        The_Character.GetComponent<Character_Move>().washStains();
+
         if (Time_Lord.timebender > 1f)
         {
             Time_Lord.timebender -= 0.1f;

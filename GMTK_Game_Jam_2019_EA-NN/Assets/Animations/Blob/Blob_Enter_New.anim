@@ -93,4 +93,12 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1
+    functionName: generateTrail
+    data: 
+    objectReferenceParameter: {fileID: 4137640020099156092, guid: 729c5c07458344fb7924f1147678d289,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

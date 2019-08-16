@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 4137640020099156092}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.5, y: 6.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_Children:
   - {fileID: 5059511709946846253}
   m_Father: {fileID: 0}
@@ -107,6 +107,16 @@ MonoBehaviour:
   Pos_Ini: {x: 0, y: 0, z: 0}
   dead: 0
   soundEnter: {fileID: 0}
+  camShakeCor: 0.2
+  shakeTime: 0.25
+  trailRef: {fileID: 8891820364673924131, guid: be7432b6561d740998c91089e1edd174,
+    type: 3}
+  currentTrail: {fileID: 0}
+  deathStain: {fileID: 9072966286296940230, guid: a5cdb83cfb07b45b99dcb7c89c59621c,
+    type: 3}
+  deathStains: {fileID: 0}
+  mouseCursor: {fileID: 0}
+  blobRotSpeed: 10
 --- !u!58 &5159034467742574382
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -175,7 +185,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e0d6774cd1a7a4c8ba03f5a24e3b1eee, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
