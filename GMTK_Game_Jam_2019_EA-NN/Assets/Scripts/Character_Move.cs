@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 public class Character_Move : MonoBehaviour
 {
@@ -38,6 +39,9 @@ public class Character_Move : MonoBehaviour
     private bool mouseMoving;
 
     public float blobRotSpeed;
+
+    public PostProcessVolume myPostProcess;
+    private DepthOfField myBlur;
 
     void MouseCursor ()
     {
@@ -245,6 +249,9 @@ public class Character_Move : MonoBehaviour
             Camera.main.transform.position = cameraIni + new Vector3(Random.value * camShakeCor, Random.value * camShakeCor, Random.value * camShakeCor);
             if (shakeTimer >= shakeTime)
                 shake = false;
+
+            myPostProcess.profile.TryGetSettings(out myBlur);
+            myBlur.focalLength.value = Mathf.Lerp(1f, 50f, -Mathf.Abs(2 * ((shakeTimer / shakeTime) - 0.5f)) + 1);
         }
     }
 
