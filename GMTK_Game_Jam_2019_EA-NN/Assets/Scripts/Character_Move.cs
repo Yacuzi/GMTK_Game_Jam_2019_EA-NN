@@ -20,7 +20,7 @@ public class Character_Move : MonoBehaviour
     private bool Ready, exiting;
     [HideInInspector]
     public bool dead;
-    private Animator CharaAnim;
+    public Animator CharaAnim;
 
     public AudioSource soundEnter;
 
@@ -44,6 +44,9 @@ public class Character_Move : MonoBehaviour
 
     public PostProcessVolume myPostProcess;
     private DepthOfField myBlur;
+
+    [HideInInspector]
+    public int nbDeath;
 
     void MouseCursor ()
     {
@@ -122,7 +125,9 @@ public class Character_Move : MonoBehaviour
                 {
                     if (Vector3.Distance(mouseCursor.transform.position, transform.position) >= 0.5f)
                     {
-                        CharaAnim.Play("Blob_Down");
+                        if (Level_Manager.Current_Level != The_Level_Manager.finalLevel - 1)
+                            CharaAnim.Play("Blob_Down");
+
                         return;
                     }
                 }
@@ -143,8 +148,10 @@ public class Character_Move : MonoBehaviour
                 transform.Rotate(Vector3.forward, Time.deltaTime * blobRotSpeed * angle);
 
                 if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0 || Mathf.Abs(Input.GetAxis("Vertical")) > 0)
-                {                    
+                {
+                    if (Level_Manager.Current_Level != The_Level_Manager.finalLevel - 1)
                         CharaAnim.Play("Blob_Down");
+
                         return;
                 }
 
@@ -228,6 +235,8 @@ public class Character_Move : MonoBehaviour
 
     public void Kill ()
     {
+        nbDeath++;
+
         shake = true;
         shakeTimer = 0;
 
@@ -341,7 +350,6 @@ public class Character_Move : MonoBehaviour
 
     private void Start()
     {
-        CharaAnim = GetComponent<Animator>();
         cameraIni = Camera.main.transform.position;
         generateTrail();
 

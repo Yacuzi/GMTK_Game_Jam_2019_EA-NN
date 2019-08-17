@@ -10,6 +10,7 @@ public class Level_Manager : MonoBehaviour
     public int finalLevel;
     public GameObject cameraLevel;
     public GameObject blackScreen;
+    public GameObject drippingObject;
 
     public Transform[] Character_Pos, exitPos;
     public GameObject[] Level_Content;
@@ -56,7 +57,7 @@ public class Level_Manager : MonoBehaviour
 
         if ((theTimeLord.IntroTime_Lord && Current_Level != 2) || !theTimeLord.IntroTime_Lord)
         {
-            The_Character.GetComponent<Animator>().Play("Blob_Enter_New", -1, 0f);
+            The_Character.GetComponent<Character_Move>().CharaAnim.Play("Blob_Enter_New", -1, 0f);
             soundEnter.PlayDelayed(1.2f);
         }
 
@@ -74,8 +75,16 @@ public class Level_Manager : MonoBehaviour
         {
             HideTurret.enabled = false;
             cameraLevel.SetActive(true);
-            blackScreen.SetActive(false);
-            The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 5;
+            The_Character.transform.rotation = Quaternion.identity;
+
+            if (The_Character.GetComponent<Character_Move>().nbDeath > 0)
+                The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 5;
+            else
+            {
+                The_Character.GetComponent<Character_Move>().dead = true;
+                drippingObject.SetActive(true);
+                The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 10;
+            }
         }
     }
 
@@ -118,6 +127,9 @@ public class Level_Manager : MonoBehaviour
                 theTimeLord.Reset_Level();
                 Time_Lord.Preparing = true;
                 Time_Lord.The_Timer = 0f;
+
+                if (Current_Level == finalLevel -1)
+                    blackScreen.SetActive(false);
 
                 if (theTimeLord.IntroTime_Lord && Level_Manager.Current_Level == 2)
                 {
