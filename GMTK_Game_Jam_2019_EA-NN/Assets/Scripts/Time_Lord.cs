@@ -52,7 +52,7 @@ public class Time_Lord : MonoBehaviour
         {
             if (Acting && !IntroTime_Lord)
             {
-                if (Level_Manager.Current_Level != 19)
+                if (Level_Manager.Current_Level != The_Level_Manager.finalLevel -1)
                 {
                     Reset_Time();
                     Acting = false;
@@ -75,7 +75,7 @@ public class Time_Lord : MonoBehaviour
                 thebar.transform.localScale = Vector3.zero;
                 thebar.SetActive(true);
 
-                if (Level_Manager.Current_Level == 19)
+                if (Level_Manager.Current_Level == The_Level_Manager.finalLevel - 1)
                 {
                     thebar.SetActive(false);
                 }

@@ -43,3 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59eb8d5185d4d4fa2a9b7ff496fe6ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  finalLevel: 20
+  Character_Pos: []
+  exitPos: []
+  Level_Content: []
+  The_Character: {fileID: 0}
+  MonMask: {fileID: 0}
+  transitionTime: 0
+  soundEnter: {fileID: 0}
+  HideTurret: {fileID: 0}
+  theTimeLord: {fileID: 0}
+  transitionSound: {fileID: 0}

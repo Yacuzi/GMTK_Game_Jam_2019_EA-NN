@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 public class Character_Move : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Character_Move : MonoBehaviour
     public GameObject deathStains;
 
     public GameObject mouseCursor;
+    public GameObject mouseImage;
     private bool mouseMoving;
 
     public float blobRotSpeed;
@@ -45,6 +47,8 @@ public class Character_Move : MonoBehaviour
 
     void MouseCursor ()
     {
+        mouseImage.transform.position = Input.mousePosition;
+
         mouseCursor.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mouseCursor.transform.position = new Vector3(mouseCursor.transform.position.x, mouseCursor.transform.position.y, 0f);
     }
@@ -53,13 +57,13 @@ public class Character_Move : MonoBehaviour
     {
         if (Input.GetButton("Vertical") || Input.GetButton("Horizontal"))
         {
-            mouseCursor.GetComponent<SpriteRenderer>().enabled = false;
+            mouseImage.GetComponent<Image>().enabled = false;
             mouseMoving = false;
         }
 
         else if (Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2))
         {
-            mouseCursor.GetComponent<SpriteRenderer>().enabled = true;
+            mouseImage.GetComponent<Image>().enabled = true;
             mouseMoving = true;
         }
     }

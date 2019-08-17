@@ -7,6 +7,9 @@ public class Level_Manager : MonoBehaviour
 {
     public static int Current_Level;
     public static bool myTransition;
+    public int finalLevel;
+    public GameObject cameraLevel;
+    public GameObject blackScreen;
 
     public Transform[] Character_Pos, exitPos;
     public GameObject[] Level_Content;
@@ -67,9 +70,12 @@ public class Level_Manager : MonoBehaviour
             Time_Lord.timebender -= 0.1f;
         }
 
-        if (Current_Level == 19)
+        if (Current_Level == finalLevel -1)
         {
             HideTurret.enabled = false;
+            cameraLevel.SetActive(true);
+            blackScreen.SetActive(false);
+            The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 5;
         }
     }
 
@@ -144,7 +150,11 @@ public class Level_Manager : MonoBehaviour
         }
 
         if (The_Character.GetComponent<Character_Move>().debug && Input.GetKeyDown(KeyCode.Space))
+        {
             Change_Level();
+            Time_Lord.Preparing = true;
+            Time_Lord.The_Timer = 0f;
+        }
 
             if (myTransition)
         {
