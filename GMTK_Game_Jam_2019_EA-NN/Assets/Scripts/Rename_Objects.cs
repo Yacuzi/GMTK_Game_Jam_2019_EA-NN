@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 public class Rename_Objects : MonoBehaviour
 {
     public bool renameObjects;
@@ -10,10 +11,11 @@ public class Rename_Objects : MonoBehaviour
 
     void RenameMyObjects()
     {
+        allGameObjects = GetComponentsInChildren<Transform>();
+        int nbLevels = 1, nbExits = 1, nbEntries = 1;
+
         foreach (Transform anObject in allGameObjects)
         {
-            int nbLevels = 0, nbExits = 0, nbEntries = 0;
-
             if (anObject.CompareTag("Level"))
             {
                 anObject.name = "Level (" + nbLevels + ")";
@@ -23,13 +25,13 @@ public class Rename_Objects : MonoBehaviour
             if(anObject.CompareTag("Exit"))
             {
                 anObject.name = "Exit (" + nbExits + ")";
-                nbLevels++;
+                nbExits++;
             }
 
             if(anObject.CompareTag("Entry"))
             {
                 anObject.name = "Entry (" + nbEntries + ")";
-                nbLevels++;
+                nbEntries++;
             }
         }
 
@@ -38,7 +40,6 @@ public class Rename_Objects : MonoBehaviour
 
     private void Start()
     {
-        allGameObjects = GetComponentsInChildren<Transform>();
     }
 
     // Update is called once per frame
