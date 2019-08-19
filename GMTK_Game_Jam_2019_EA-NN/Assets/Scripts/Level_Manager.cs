@@ -66,7 +66,7 @@ public class Level_Manager : MonoBehaviour
 
         The_Character.GetComponent<Character_Move>().washStains();
 
-        if (Time_Lord.timebender > 1f)
+        if (Time_Lord.timebender > 1f && !The_Character.GetComponent<Character_Move>().timeRuler)
         {
             Time_Lord.timebender -= 0.1f;
         }

@@ -11,7 +11,7 @@ public class Character_Move : MonoBehaviour
     public Animator VFX;
 
     public float speed;
-    public bool debug;
+    public bool debug, timeRuler;
     [HideInInspector]
     public Vector3 Pos_Ini;
 
@@ -247,7 +247,7 @@ public class Character_Move : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = false;
         GetComponent<AudioSource>().Play();
 
-        if (Time_Lord.timebender < 1.5f)
+        if (Time_Lord.timebender < 1.5f && !timeRuler)
             Time_Lord.timebender += 0.025f;
 
         VFX.Play("VFXDeath_Die", -1, 0f);
