@@ -22,7 +22,13 @@ public class Rename_Objects : MonoBehaviour
                 nbLevels++;
             }
 
-            if(anObject.CompareTag("Exit"))
+			if (anObject.CompareTag("Bonus"))
+			{
+				anObject.name = "Level (" + nbLevels + ")" + " Bonus";
+				nbLevels++;
+			}
+
+			if (anObject.CompareTag("Exit"))
             {
                 anObject.name = "Exit (" + nbExits + ")";
                 nbExits++;

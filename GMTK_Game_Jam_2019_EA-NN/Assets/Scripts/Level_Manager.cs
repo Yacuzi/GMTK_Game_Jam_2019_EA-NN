@@ -14,6 +14,7 @@ public class Level_Manager : MonoBehaviour
 
     public Transform[] Character_Pos, exitPos;
     public GameObject[] Level_Content;
+    public bool[] Safe_Level;
 
     public GameObject The_Character;
     public GameObject MonMask;
@@ -51,8 +52,10 @@ public class Level_Manager : MonoBehaviour
     public void Change_Level()
     {
         Current_Level++;
+
         Level_Content[Current_Level - 1].SetActive(false);
         Level_Content[Current_Level].SetActive(true);
+
         The_Character.transform.position = Character_Pos[Current_Level].position + new Vector3(0.5f, 0.5f, 0);
         The_Character.GetComponent<Character_Move>().dead = false;
 
@@ -72,9 +75,17 @@ public class Level_Manager : MonoBehaviour
             Time_Lord.timebender -= 0.1f;
         }
 
-        if (Current_Level == finalLevel -1)
+        if (Safe_Level[Current_Level])
         {
             HideTurret.enabled = false;
+        }
+        else
+        {
+            HideTurret.enabled = true;
+        }
+
+        if (Current_Level == finalLevel -1)
+        {
             cameraLevel.SetActive(true);
             The_Character.transform.rotation = Quaternion.identity;
 

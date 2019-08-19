@@ -19,7 +19,7 @@ public class Character_Birth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        characMove.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        characMove.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
     }
 
     //Called by animation
@@ -66,7 +66,7 @@ public class Character_Birth : MonoBehaviour
 
             GetComponent<Animator>().Play("Birth_Trajectory");
             characterAnim.Play("Blob_Birth");
-            characMove.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            characMove.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
 
             soundBirth.Play();
             soundEnter.PlayDelayed(0.75f);

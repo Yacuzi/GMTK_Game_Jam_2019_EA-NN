@@ -7,6 +7,7 @@ TagManager:
   - Level
   - Exit
   - Entry
+  - Bonus
   layers:
   - Default
   - TransparentFX

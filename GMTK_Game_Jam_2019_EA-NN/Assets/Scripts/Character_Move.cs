@@ -359,7 +359,7 @@ public class Character_Move : MonoBehaviour
         if (!theTimeLord.IntroTime_Lord)
         {
             CharaAnim.Play("Blob_Enter");
-            soundEnter.PlayDelayed(0.2f);
+            //soundEnter.PlayDelayed(0.2f);
         }
     }
 
