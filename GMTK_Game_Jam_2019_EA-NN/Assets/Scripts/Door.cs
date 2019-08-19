@@ -6,6 +6,7 @@ public class Door : Resetables
 {
     public bool StartOpen;
     public AudioClip openClip, closeClip;
+    public Character_Move theCharacter;
 
     private bool opened, lastOpened;
 
@@ -18,7 +19,7 @@ public class Door : Resetables
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && opened)
+        if (collision.gameObject.CompareTag("Player") && opened && !theCharacter.dead)
         {
             Time_Lord.Acting = false;
             Time_Lord.Transitioning = true;

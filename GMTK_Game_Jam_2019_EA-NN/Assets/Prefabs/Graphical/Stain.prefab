@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9072966286296940280}
   - component: {fileID: 9072966286296940231}
   - component: {fileID: -1630722198990928630}
+  - component: {fileID: -471913916168005300}
   m_Layer: 0
   m_Name: Stain
   m_TagString: Untagged
@@ -89,10 +90,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9072966286296940230}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41d5746b9cdcc480180300908b47fcdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   growTime: 0.25
   sizeGrow: {x: 3, y: 3, z: 3}
+--- !u!95 &-471913916168005300
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9072966286296940230}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 01c30687737cd4f92a64dfd39b78b28a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

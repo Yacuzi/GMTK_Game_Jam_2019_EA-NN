@@ -9,6 +9,8 @@ public class Ball_Behaviour : Danger
     private Vector3 pos_ini;
     private int resetInt;
 
+    public AudioSource zapSound;
+
     public override void Reset()
     {
         base.Reset();
@@ -44,6 +46,11 @@ public class Ball_Behaviour : Danger
     void Start()
     {
         pos_ini = transform.position;
+
+        if (!zapSound.isPlaying)
+        {
+            zapSound.Play();
+        }
     }
 
     private void Update()

@@ -31,6 +31,7 @@ public class Level_Manager : MonoBehaviour
     public Time_Lord theTimeLord;
 
     public AudioSource transitionSound;
+    public AudioSource zapSound;
 
     private bool loadMyScene;
 
@@ -77,7 +78,7 @@ public class Level_Manager : MonoBehaviour
             cameraLevel.SetActive(true);
             The_Character.transform.rotation = Quaternion.identity;
 
-            if (The_Character.GetComponent<Character_Move>().nbDeath > 0)
+            if (The_Character.GetComponent<Character_Move>().nbDeath > 10)
                 The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 5;
             else
             {
@@ -112,6 +113,8 @@ public class Level_Manager : MonoBehaviour
         {
             if (!changeOnce)
             {
+                zapSound.Stop();
+
                 changeOnce = true;
                 Change_Level();
             }

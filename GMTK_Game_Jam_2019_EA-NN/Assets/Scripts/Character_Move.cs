@@ -235,23 +235,26 @@ public class Character_Move : MonoBehaviour
 
     public void Kill ()
     {
-        nbDeath++;
+        if (Time_Lord.Acting || Time_Lord.Preparing)
+        {
+            nbDeath++;
 
-        shake = true;
-        shakeTimer = 0;
+            shake = true;
+            shakeTimer = 0;
 
-        ejectTrail();
-        generateDeathStain();
+            ejectTrail();
+            generateDeathStain();
 
-        dead = true;
-        GetComponent<CircleCollider2D>().enabled = false;
-        GetComponent<AudioSource>().Play();
+            dead = true;
+            GetComponent<CircleCollider2D>().enabled = false;
+            GetComponent<AudioSource>().Play();
 
-        if (Time_Lord.timebender < 1.5f && !timeRuler)
-            Time_Lord.timebender += 0.025f;
+            if (Time_Lord.timebender < 1.5f && !timeRuler)
+                Time_Lord.timebender += 0.025f;
 
-        VFX.Play("VFXDeath_Die", -1, 0f);
-        CharaAnim.Play("Blob_Death",-1,0f);
+            VFX.Play("VFXDeath_Die", -1, 0f);
+            CharaAnim.Play("Blob_Death", -1, 0f);
+        }
     }
 
     private void shakyCam ()
