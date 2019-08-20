@@ -238,6 +238,7 @@ public class Character_Move : MonoBehaviour
         if (Time_Lord.Acting || Time_Lord.Preparing)
         {
             nbDeath++;
+            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
 
             shake = true;
             shakeTimer = 0;

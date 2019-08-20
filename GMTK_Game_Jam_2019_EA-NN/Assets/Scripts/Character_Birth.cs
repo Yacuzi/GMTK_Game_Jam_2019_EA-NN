@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class Character_Birth : MonoBehaviour
 {
@@ -38,6 +39,7 @@ public class Character_Birth : MonoBehaviour
             myColor.a += Time.deltaTime / 2;
 
             tutoSprite.color = myColor;
+            characMove.mouseImage.GetComponent<Image>().enabled = true;
         }
     }
 

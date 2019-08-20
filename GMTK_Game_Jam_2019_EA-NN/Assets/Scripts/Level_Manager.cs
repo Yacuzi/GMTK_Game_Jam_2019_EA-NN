@@ -36,6 +36,8 @@ public class Level_Manager : MonoBehaviour
 
     private bool loadMyScene;
 
+    private bool loadedGame;
+
     public void resetStatic()
     {
         Level_Manager.Current_Level = 0;
@@ -62,11 +64,15 @@ public class Level_Manager : MonoBehaviour
         if ((theTimeLord.IntroTime_Lord && Current_Level != 2) || !theTimeLord.IntroTime_Lord)
         {
             The_Character.GetComponent<Character_Move>().CharaAnim.Play("Blob_Enter_New", -1, 0f);
-            soundEnter.PlayDelayed(1.2f);
+            if(loadedGame)
+                soundEnter.PlayDelayed(1.2f);
+            else
+                soundEnter.PlayDelayed(0.6f);
         }
 
         The_Character.GetComponent<Character_Move>().ejectTrail();
-        Destroy(The_Character.GetComponent<Character_Move>().currentTrail);
+        if (The_Character.GetComponent<Character_Move>().currentTrail != null)
+            Destroy(The_Character.GetComponent<Character_Move>().currentTrail);
 
         The_Character.GetComponent<Character_Move>().washStains();
 
@@ -78,6 +84,7 @@ public class Level_Manager : MonoBehaviour
         if (Safe_Level[Current_Level])
         {
             HideTurret.enabled = false;
+            PlayerPrefs.SetInt("Level", Current_Level);
         }
         else
         {
@@ -162,14 +169,44 @@ public class Level_Manager : MonoBehaviour
         return;
     }
 
-    private void Start()
+    void DeleteSave ()
+    {
+        if (Input.GetKeyDown(KeyCode.D) && Input.GetKeyDown(KeyCode.L))
+        {
+            PlayerPrefs.SetInt("Level", 0);
+            PlayerPrefs.SetInt("Deaths", 0);
+            transitionSound.Play();
+        }
+    }
+
+    private void Awake()
     {
         mask_ini = MonMask.transform.localScale;
         Cursor.visible = false;
+
+        if (PlayerPrefs.GetInt("Level") > 0)
+        {
+            The_Character.GetComponent<Character_Move>().nbDeath = PlayerPrefs.GetInt("Deaths");
+
+            The_Character.GetComponentInParent<Character_Birth>().enabled = false;
+            The_Character.GetComponent<Character_Move>().enabled = true;
+            The_Character.GetComponent<CircleCollider2D>().enabled = true;
+            Level_Content[0].SetActive(false);
+            Current_Level = PlayerPrefs.GetInt("Level") - 1;
+            Change_Level();
+
+            if (Current_Level == finalLevel - 1)
+                blackScreen.SetActive(false);
+            loadedGame = true;
+        }
+        else
+            loadedGame = true;
     }
 
     private void Update()
     {
+        DeleteSave();
+
         if (loadMyScene && !transitionSound.isPlaying)
         {
             loadNewScene();
