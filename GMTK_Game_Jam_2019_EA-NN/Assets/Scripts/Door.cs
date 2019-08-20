@@ -32,9 +32,13 @@ public class Door : Resetables
     {
         base.Reset();
 
-        opened = opened_ini;
-        if (!StartOpen)
-            Open();
+        if (!The_Level_Manager.Safe_Level[Level_Manager.Current_Level])
+        {
+            opened = opened_ini;
+
+            if (!StartOpen)
+                Open();
+        }
     }
 
     public void Open ()

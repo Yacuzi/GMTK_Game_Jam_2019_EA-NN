@@ -52,26 +52,34 @@ public class Time_Lord : MonoBehaviour
         {
             if (Acting && !IntroTime_Lord)
             {
+                Reset_Time();
+                
+                Reset_Level();
+
                 if (!The_Level_Manager.Safe_Level[Level_Manager.Current_Level])
                 {
-                    Reset_Time();
+
                     Acting = false;
                     Preparing = true;
-                    Reset_Level();
+
                     theTurret.laserAnim();
                     if (!Character.dead)
                         laserSound.Play();
                     Character.Reset_Character();
                 }
+
                 thebar.SetActive(false);
                 return;
             }
             if (Preparing)
             {
                 Reset_Time();
+
                 Preparing = false;
                 Acting = true;
+
                 Reset_Level();
+
                 thebar.transform.localScale = Vector3.zero;
 
                 if (!The_Level_Manager.Safe_Level[Level_Manager.Current_Level])

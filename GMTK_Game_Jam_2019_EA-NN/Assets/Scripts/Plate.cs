@@ -8,6 +8,8 @@ public class Plate : Resetables
 
     public Sprite activated_Plate, up_Plate;
 
+    public Level_Manager theLevelManager;
+
     private bool activated_ini;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,7 +27,9 @@ public class Plate : Resetables
     {
         base.Reset();
 
-        activated = activated_ini;
+        if (!theLevelManager.Safe_Level[Level_Manager.Current_Level])
+            activated = activated_ini;
+
         Activate();
     }
 
