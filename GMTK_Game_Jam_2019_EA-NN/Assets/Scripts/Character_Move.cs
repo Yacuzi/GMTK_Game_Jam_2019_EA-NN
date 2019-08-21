@@ -48,6 +48,8 @@ public class Character_Move : MonoBehaviour
     [HideInInspector]
     public int nbDeath;
 
+    public Transform cameraShake;
+
     void MouseCursor ()
     {
         mouseImage.transform.position = Input.mousePosition;
@@ -263,7 +265,7 @@ public class Character_Move : MonoBehaviour
         if (shake)
         {
             shakeTimer += Time.deltaTime;
-            Camera.main.transform.position = cameraIni + new Vector3(Random.value * camShakeCor, Random.value * camShakeCor, Random.value * camShakeCor);
+            cameraShake.position = cameraIni + new Vector3(Random.value * camShakeCor, Random.value * camShakeCor, Random.value * camShakeCor);
             if (shakeTimer >= shakeTime)
                 shake = false;
 
