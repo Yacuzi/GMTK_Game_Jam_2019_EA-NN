@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Level_Manager : MonoBehaviour
 {
@@ -37,6 +38,8 @@ public class Level_Manager : MonoBehaviour
     private bool loadMyScene;
 
     private bool loadedGame;
+
+    public TextMeshProUGUI gameSavedText;
 
     public void resetStatic()
     {
@@ -85,6 +88,7 @@ public class Level_Manager : MonoBehaviour
         {
             HideTurret.enabled = false;
             PlayerPrefs.SetInt("Level", Current_Level);
+            showGameSaved();
         }
         else
         {
@@ -105,6 +109,14 @@ public class Level_Manager : MonoBehaviour
                 The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 10;
             }
         }
+    }
+
+    private void showGameSaved()
+    {
+        Color myColor = gameSavedText.color;
+        myColor.a = 1f;
+
+        gameSavedText.color = myColor;
     }
 
     public void StartTransition()
@@ -179,6 +191,14 @@ public class Level_Manager : MonoBehaviour
         }
     }
 
+    void ChangeFullScreen()
+    {
+        if (Input.GetKey(KeyCode.F) && Input.GetKey(KeyCode.LeftShift))
+        {
+            Screen.fullScreen = !Screen.fullScreen;
+        }
+    }
+
     private void Awake()
     {
         mask_ini = MonMask.transform.localScale;
@@ -206,6 +226,7 @@ public class Level_Manager : MonoBehaviour
     private void Update()
     {
         DeleteSave();
+        ChangeFullScreen();
 
         if (loadMyScene && !transitionSound.isPlaying)
         {
