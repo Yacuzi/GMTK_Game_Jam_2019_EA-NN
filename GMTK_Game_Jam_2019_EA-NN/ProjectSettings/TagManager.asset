@@ -42,9 +42,57 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Backgrounds
+    uniqueID: 893073041
+    locked: 0
+  - name: Entries
+    uniqueID: 2864487577
+    locked: 0
+  - name: Exits
+    uniqueID: 1964676345
+    locked: 0
+  - name: Spikes
+    uniqueID: 1020959063
+    locked: 0
+  - name: Buttons
+    uniqueID: 441956383
+    locked: 0
+  - name: Stain
+    uniqueID: 3018365315
+    locked: 0
+  - name: Trail
+    uniqueID: 4084455881
+    locked: 0
+  - name: Character
+    uniqueID: 3462208615
+    locked: 0
+  - name: VFXDeath
+    uniqueID: 2481500029
+    locked: 0
+  - name: ZapBall
+    uniqueID: 398868461
+    locked: 0
+  - name: MovingZapBall
+    uniqueID: 3692011249
+    locked: 0
+  - name: Walls
+    uniqueID: 2202691671
+    locked: 0
+  - name: Barreau
+    uniqueID: 399066279
+    locked: 0
   - name: False_Light
     uniqueID: 2101563983
     locked: 0
-  - name: Default
-    uniqueID: 0
+  - name: Laser
+    uniqueID: 2846939659
+    locked: 0
+  - name: Loading Bar
+    uniqueID: 160888853
+    locked: 0
+  - name: Transitions
+    uniqueID: 2684347271
     locked: 0
