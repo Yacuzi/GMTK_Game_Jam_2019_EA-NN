@@ -202,7 +202,6 @@ public class Level_Manager : MonoBehaviour
     private void Awake()
     {
         mask_ini = MonMask.transform.localScale;
-        Cursor.visible = false;
 
         if (PlayerPrefs.GetInt("Level") > 0)
         {

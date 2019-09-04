@@ -50,11 +50,36 @@ public class Character_Move : MonoBehaviour
 
     public Transform cameraShake;
 
+    private float mouseSensitivity = 1;
+
     void MouseCursor ()
     {
-        mouseImage.transform.position = Input.mousePosition;
+        //mouseImage.transform.position = Input.mousePosition;
 
-        mouseCursor.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
+        {
+            mouseSensitivity += 0.05f;
+        }
+        else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
+        {
+            mouseSensitivity -= 0.05f;
+        }
+
+        Mathf.Clamp(mouseSensitivity, 0.2f, 5f);
+
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+        Vector3 mouseMovement = new Vector3(mouseX, mouseY, 0);
+
+        Vector3 mousePosCor = mouseImage.transform.position + (mouseMovement * 20f * mouseSensitivity);
+        float mousePosCorx = Mathf.Clamp(mousePosCor.x, 0, Screen.width);
+        float mousePosCory = Mathf.Clamp(mousePosCor.y, 0, Screen.height);
+        mousePosCor = new Vector3(mousePosCorx, mousePosCory, 0);
+
+        mouseImage.transform.position = mousePosCor;
+
+        //Cursor the player actually follows movement
+        mouseCursor.transform.position = Camera.main.ScreenToWorldPoint(mousePosCor);
         mouseCursor.transform.position = new Vector3(mouseCursor.transform.position.x, mouseCursor.transform.position.y, 0f);
     }
 
@@ -364,6 +389,9 @@ public class Character_Move : MonoBehaviour
             CharaAnim.Play("Blob_Enter");
             //soundEnter.PlayDelayed(0.2f);
         }
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
