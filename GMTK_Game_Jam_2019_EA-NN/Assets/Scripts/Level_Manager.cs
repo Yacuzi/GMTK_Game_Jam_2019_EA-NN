@@ -246,7 +246,13 @@ public class Level_Manager : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            if (Cursor.lockState != CursorLockMode.Locked)
+                Application.Quit();
+            else
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
     }
 }

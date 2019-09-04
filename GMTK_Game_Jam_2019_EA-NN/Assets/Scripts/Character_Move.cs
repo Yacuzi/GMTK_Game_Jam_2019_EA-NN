@@ -59,19 +59,21 @@ public class Character_Move : MonoBehaviour
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
             mouseSensitivity += 0.05f;
+            PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
             mouseSensitivity -= 0.05f;
+            PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
         }
 
-        Mathf.Clamp(mouseSensitivity, 0.2f, 5f);
+        Mathf.Clamp(mouseSensitivity, -0.8f, 3f);
 
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
         Vector3 mouseMovement = new Vector3(mouseX, mouseY, 0);
 
-        Vector3 mousePosCor = mouseImage.transform.position + (mouseMovement * 20f * mouseSensitivity);
+        Vector3 mousePosCor = mouseImage.transform.position + (mouseMovement * 20f * (1f + mouseSensitivity));
         float mousePosCorx = Mathf.Clamp(mousePosCor.x, 0, Screen.width);
         float mousePosCory = Mathf.Clamp(mousePosCor.y, 0, Screen.height);
         mousePosCor = new Vector3(mousePosCorx, mousePosCory, 0);
@@ -89,12 +91,16 @@ public class Character_Move : MonoBehaviour
         {
             mouseImage.GetComponent<Image>().enabled = false;
             mouseMoving = false;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         else if (Input.GetMouseButton(0) || Input.GetMouseButton(1) || Input.GetMouseButton(2))
         {
             mouseImage.GetComponent<Image>().enabled = true;
             mouseMoving = true;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
     }
 
@@ -392,6 +398,7 @@ public class Character_Move : MonoBehaviour
 
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        mouseSensitivity = PlayerPrefs.GetFloat("Sensitivity");
     }
 
     // Update is called once per frame
