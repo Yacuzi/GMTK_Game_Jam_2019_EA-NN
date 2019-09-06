@@ -18,7 +18,7 @@ public class Time_Lord : MonoBehaviour
     public static bool Preparing = true;
     public static bool Transitioning = false, inTransition = false;
 
-    public static float timebender = 1;
+    public static float timebender;
 
     public GameObject thebar;
 
@@ -68,7 +68,7 @@ public class Time_Lord : MonoBehaviour
                     Character.Reset_Character();
                 }
 
-                thebar.SetActive(false);
+                //thebar.SetActive(false);
                 return;
             }
             if (Preparing)
@@ -80,7 +80,7 @@ public class Time_Lord : MonoBehaviour
 
                 Reset_Level();
 
-                thebar.transform.localScale = Vector3.zero;
+                //thebar.transform.localScale = Vector3.zero;
 
                 if (!The_Level_Manager.Safe_Level[Level_Manager.Current_Level])
                 {
@@ -130,7 +130,7 @@ public class Time_Lord : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Update_Time();
         Tick();
+        Update_Time();
     }
 }

@@ -22,7 +22,6 @@ public class Level_Manager : MonoBehaviour
 
     public float transitionTime;
 
-
     private bool transitionOut, changeOnce;
     private Vector3 mask_ini;
     private float transitionSize;
@@ -37,8 +36,6 @@ public class Level_Manager : MonoBehaviour
 
     private bool loadMyScene;
 
-    private bool loadedGame;
-
     public TextMeshProUGUI gameSavedText;
 
     public void resetStatic()
@@ -49,12 +46,12 @@ public class Level_Manager : MonoBehaviour
         Time_Lord.Acting = false;
         Time_Lord.Preparing = true;
         Time_Lord.Transitioning = false;
-        Time_Lord.timebender = 1f;
+        Time_Lord.timebender = PlayerPrefs.GetFloat("TimeBender");
         Time_Lord.inTransition = false;
         Time_Lord.The_Timer = 0f;
     }
 
-    public void Change_Level()
+    public void Change_Level(bool initLevel)
     {
         Current_Level++;
 
@@ -67,28 +64,34 @@ public class Level_Manager : MonoBehaviour
         if ((theTimeLord.IntroTime_Lord && Current_Level != 2) || !theTimeLord.IntroTime_Lord)
         {
             The_Character.GetComponent<Character_Move>().CharaAnim.Play("Blob_Enter_New", -1, 0f);
-            if(loadedGame)
+            if(!initLevel)
                 soundEnter.PlayDelayed(1.2f);
             else
                 soundEnter.PlayDelayed(0.6f);
         }
 
         The_Character.GetComponent<Character_Move>().ejectTrail();
+
         if (The_Character.GetComponent<Character_Move>().currentTrail != null)
             Destroy(The_Character.GetComponent<Character_Move>().currentTrail);
 
         The_Character.GetComponent<Character_Move>().washStains();
 
-        if (Time_Lord.timebender > 1f && !The_Character.GetComponent<Character_Move>().timeRuler)
+        if (!The_Character.GetComponent<Character_Move>().timeRuler && !initLevel)
         {
-            Time_Lord.timebender -= 0.1f;
+            Time_Lord.timebender = Mathf.Clamp(Time_Lord.timebender - 0.1f, 1f, 1.25f);         
+            PlayerPrefs.SetFloat("TimeBender", Time_Lord.timebender);
         }
 
         if (Safe_Level[Current_Level])
         {
             HideTurret.enabled = false;
-            PlayerPrefs.SetInt("Level", Current_Level);
-            showGameSaved();
+            if (!initLevel)
+            {
+                PlayerPrefs.SetInt("Level", Current_Level);
+                PlayerPrefs.SetInt("Deaths", The_Character.GetComponent<Character_Move>().nbDeath);
+                showGameSaved();
+            }
         }
         else
         {
@@ -146,7 +149,7 @@ public class Level_Manager : MonoBehaviour
                 zapSound.Stop();
 
                 changeOnce = true;
-                Change_Level();
+                Change_Level(false);
             }
 
             if (Time_Lord.The_Timer <= 1f)
@@ -201,6 +204,14 @@ public class Level_Manager : MonoBehaviour
 
     private void Awake()
     {
+        Time_Lord.timebender = PlayerPrefs.GetFloat("TimeBender");
+
+        if (Time_Lord.timebender < 1f)
+        {
+            PlayerPrefs.SetFloat("TimeBender", 1f);
+            Time_Lord.timebender = 1f;
+        }
+
         mask_ini = MonMask.transform.localScale;
 
         if (PlayerPrefs.GetInt("Level") > 0)
@@ -212,18 +223,18 @@ public class Level_Manager : MonoBehaviour
             The_Character.GetComponent<CircleCollider2D>().enabled = true;
             Level_Content[0].SetActive(false);
             Current_Level = PlayerPrefs.GetInt("Level") - 1;
-            Change_Level();
+            Change_Level(true);
 
             if (Current_Level == finalLevel - 1)
                 blackScreen.SetActive(false);
-            loadedGame = true;
         }
-        else
-            loadedGame = true;
     }
 
     private void Update()
     {
+        Debug.Log(Time_Lord.timebender);
+        Debug.Log(Time_Lord.The_Timer);
+
         DeleteSave();
         ChangeFullScreen();
 
@@ -234,7 +245,7 @@ public class Level_Manager : MonoBehaviour
 
         if (The_Character.GetComponent<Character_Move>().debug && Input.GetKeyDown(KeyCode.Space))
         {
-            Change_Level();
+            Change_Level(false);
             Time_Lord.Preparing = true;
             Time_Lord.The_Timer = 0f;
         }

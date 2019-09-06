@@ -271,7 +271,6 @@ public class Character_Move : MonoBehaviour
         if (Time_Lord.Acting || Time_Lord.Preparing)
         {
             nbDeath++;
-            PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths") + 1);
 
             shake = true;
             shakeTimer = 0;
@@ -283,11 +282,21 @@ public class Character_Move : MonoBehaviour
             GetComponent<CircleCollider2D>().enabled = false;
             GetComponent<AudioSource>().Play();
 
-            if (Time_Lord.timebender < 1.5f && !timeRuler)
-                Time_Lord.timebender += 0.025f;
+            if (!timeRuler)
+                Time_Lord.timebender = Mathf.Clamp(Time_Lord.timebender + 0.025f, 1f, 1.5f);
+
+            PlayerPrefs.SetFloat("TimeBender", Time_Lord.timebender);
 
             VFX.Play("VFXDeath_Die", -1, 0f);
             CharaAnim.Play("Blob_Death", -1, 0f);
+        }
+    }
+
+    private void Mute ()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            Camera.main.GetComponent<AudioListener>().enabled = !Camera.main.GetComponent<AudioListener>().enabled;
         }
     }
 
@@ -418,5 +427,7 @@ public class Character_Move : MonoBehaviour
         Undead();
         moveToGutter();
         shakyCam();
+
+        Mute();
     }
 }
