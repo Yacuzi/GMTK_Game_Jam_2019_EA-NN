@@ -43,6 +43,8 @@ public class Character_Move : MonoBehaviour
     public float blobRotSpeed;
 
     public PostProcessVolume myPostProcess;
+
+    public AudioSource[] sourcesToMute;
     private DepthOfField myBlur;
 
     [HideInInspector]
@@ -292,11 +294,14 @@ public class Character_Move : MonoBehaviour
         }
     }
 
-    private void Mute ()
+    private void Mute()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
-            Camera.main.GetComponent<AudioListener>().enabled = !Camera.main.GetComponent<AudioListener>().enabled;
+            foreach (AudioSource toMute in sourcesToMute)
+            {
+                toMute.mute = !toMute.mute;
+            }
         }
     }
 

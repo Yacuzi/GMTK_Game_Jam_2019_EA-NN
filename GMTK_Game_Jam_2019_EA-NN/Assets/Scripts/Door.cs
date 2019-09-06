@@ -48,11 +48,9 @@ public class Door : Resetables
         if (lastOpened != opened)
         {
             if (opened)
-                GetComponent<AudioSource>().clip = openClip;
+                The_Level_Manager.openSound.Play();
             else
-                GetComponent<AudioSource>().clip = closeClip;
-
-            GetComponent<AudioSource>().Play();
+                The_Level_Manager.closeSound.Play();
         }
 
         lastOpened = opened;

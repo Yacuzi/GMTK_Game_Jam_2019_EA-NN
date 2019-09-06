@@ -16,7 +16,7 @@ public class Plate : Resetables
     {
         if (collision.gameObject.CompareTag("Player") && !activated)
         {
-            GetComponent<AudioSource>().Play();
+            theLevelManager.buttonSound.Play();
 
             activated = true;
             Activate();

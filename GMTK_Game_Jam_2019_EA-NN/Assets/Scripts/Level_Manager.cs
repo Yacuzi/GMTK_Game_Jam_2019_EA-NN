@@ -33,6 +33,7 @@ public class Level_Manager : MonoBehaviour
 
     public AudioSource transitionSound;
     public AudioSource zapSound;
+    public AudioSource openSound, closeSound, buttonSound;
 
     private bool loadMyScene;
 
@@ -232,9 +233,6 @@ public class Level_Manager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Time_Lord.timebender);
-        Debug.Log(Time_Lord.The_Timer);
-
         DeleteSave();
         ChangeFullScreen();
 
