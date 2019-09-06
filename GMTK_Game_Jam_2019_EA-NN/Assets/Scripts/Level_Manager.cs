@@ -191,7 +191,10 @@ public class Level_Manager : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level", 0);
             PlayerPrefs.SetInt("Deaths", 0);
+            PlayerPrefs.SetFloat("TimeBender", 1f);
+            PlayerPrefs.SetFloat("Sensitivity", 0f);
             transitionSound.Play();
+            Application.Quit();
         }
     }
 

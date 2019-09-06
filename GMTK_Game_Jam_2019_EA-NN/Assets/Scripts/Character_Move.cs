@@ -69,7 +69,7 @@ public class Character_Move : MonoBehaviour
             PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
         }
 
-        Mathf.Clamp(mouseSensitivity, -0.8f, 3f);
+        mouseSensitivity = Mathf.Clamp(mouseSensitivity, -0.8f, 3f);
 
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
