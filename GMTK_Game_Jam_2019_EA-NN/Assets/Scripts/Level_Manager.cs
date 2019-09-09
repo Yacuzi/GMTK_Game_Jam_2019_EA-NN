@@ -208,6 +208,8 @@ public class Level_Manager : MonoBehaviour
 
     private void Awake()
     {
+        Cursor.visible = false;
+
         Time_Lord.timebender = PlayerPrefs.GetFloat("TimeBender");
 
         if (Time_Lord.timebender < 1f)

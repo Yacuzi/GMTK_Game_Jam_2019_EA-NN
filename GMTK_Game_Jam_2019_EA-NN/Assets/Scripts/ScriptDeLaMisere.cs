@@ -16,4 +16,9 @@ public class ScriptDeLaMisere : MonoBehaviour
     {
         theActualCharacter.generateTrail();
     }
+
+    public void setUndead ()
+    {
+        theActualCharacter.setUndead();
+    }
 }

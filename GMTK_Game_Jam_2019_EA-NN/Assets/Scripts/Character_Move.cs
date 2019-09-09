@@ -167,7 +167,8 @@ public class Character_Move : MonoBehaviour
                     }
                 }
 
-                CharaAnim.Play("Blob_Idle");
+                if (!CharaAnim.GetCurrentAnimatorStateInfo(0).IsName("Blob_Enter") && !CharaAnim.GetCurrentAnimatorStateInfo(0).IsName("Blob_Enter_New"))
+                    CharaAnim.Play("Blob_Idle");
             }
         }
     }
@@ -190,7 +191,8 @@ public class Character_Move : MonoBehaviour
                         return;
                 }
 
-                CharaAnim.Play("Blob_Idle");
+                if (!CharaAnim.GetCurrentAnimatorStateInfo(0).IsName("Blob_Enter") && !CharaAnim.GetCurrentAnimatorStateInfo(0).IsName("Blob_Enter_New"))
+                    CharaAnim.Play("Blob_Idle");
             }
         }
     }
@@ -314,8 +316,11 @@ public class Character_Move : MonoBehaviour
             if (shakeTimer >= shakeTime)
                 shake = false;
 
-            myPostProcess.profile.TryGetSettings(out myBlur);
-            myBlur.focalLength.value = Mathf.Lerp(1f, 50f, -Mathf.Abs(2 * ((shakeTimer / shakeTime) - 0.5f)) + 1);
+            if (myPostProcess != null)
+            {
+                myPostProcess.profile.TryGetSettings(out myBlur);
+                myBlur.focalLength.value = Mathf.Lerp(1f, 50f, -Mathf.Abs(2 * ((shakeTimer / shakeTime) - 0.5f)) + 1);
+            }
         }
     }
 
@@ -337,18 +342,26 @@ public class Character_Move : MonoBehaviour
    
     void Undead()
     {
-        if (Ready && Time_Lord.Preparing && Time_Lord.The_Timer >= 0.5f)
+        if (Ready)
         {
-            soundEnter.PlayDelayed(0.2f);
+            if ((Time_Lord.Preparing && Time_Lord.The_Timer >= 0.5f) || The_Level_Manager.Safe_Level[Level_Manager.Current_Level])
+            {
+                soundEnter.PlayDelayed(0.2f);
 
-            transform.rotation = Quaternion.identity;
+                transform.rotation = Quaternion.identity;
 
-            CharaAnim.Play("Blob_Enter", -1, 0f);
-            Ready = false;
-            dead = false;
-
-            generateTrail();
+                CharaAnim.Play("Blob_Enter", -1, 0f);
+                Ready = false;
+                //dead = false;
+            }
         }
+    }
+
+    public void setUndead()
+    {
+        dead = false;
+        if (currentTrail == null)
+            generateTrail();
     }
 
     //Called by animation
@@ -402,7 +415,8 @@ public class Character_Move : MonoBehaviour
     private void Start()
     {
         cameraIni = Camera.main.transform.position;
-        generateTrail();
+        if (currentTrail == null)
+            generateTrail();
 
         if (!theTimeLord.IntroTime_Lord)
         {
