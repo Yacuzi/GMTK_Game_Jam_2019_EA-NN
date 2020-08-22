@@ -50,11 +50,11 @@ public class End_Triggered : MonoBehaviour
 
             if (theCharacterMove.nbDeath > 10)
             {
-                endType.GetComponent<TextMeshProUGUI>().text = "1 / 2 NORMAL";
+                endType.GetComponent<TextMeshProUGUI>().text = "1/2 NORMAL";
             }
             else
             {
-                endType.GetComponent<TextMeshProUGUI>().text = "2/ 2 SPECIAL";
+                endType.GetComponent<TextMeshProUGUI>().text = "2/2 SPECIAL";
             }
 
             endingScoreboard.SetActive(true);
