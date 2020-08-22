@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UI;
+using TMPro;
 
 public class Character_Move : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Character_Move : MonoBehaviour
 
     private bool Ready, exiting;
     [HideInInspector]
-    public bool dead;
+    public bool dead, cannotMove;
     public Animator CharaAnim;
 
     public AudioSource soundEnter;
@@ -52,7 +53,9 @@ public class Character_Move : MonoBehaviour
 
     public Transform cameraShake;
 
-    private float mouseSensitivity = 1;
+    private int mouseSensValue = 50;
+    private float mouseSensitivity;
+    public TextMeshProUGUI sensitivityUI;
 
     void MouseCursor ()
     {
@@ -60,16 +63,22 @@ public class Character_Move : MonoBehaviour
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f) // forward
         {
-            mouseSensitivity += 0.05f;
+            mouseSensValue ++;
+            mouseSensValue = Mathf.Clamp(mouseSensValue, 0, 100);
             PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
+
+            updateAndShowSensitivity();
         }
         else if (Input.GetAxis("Mouse ScrollWheel") < 0f) // backwards
         {
-            mouseSensitivity -= 0.05f;
+            mouseSensValue--;
+            mouseSensValue = Mathf.Clamp(mouseSensValue, 0, 100);
             PlayerPrefs.SetFloat("Sensitivity", mouseSensitivity);
+
+            updateAndShowSensitivity();
         }
 
-        mouseSensitivity = Mathf.Clamp(mouseSensitivity, -0.8f, 3f);
+        mouseSensitivity = ((mouseSensValue * 3.6f) / 100f) - 0.8f;
 
         float mouseX = Input.GetAxis("Mouse X");
         float mouseY = Input.GetAxis("Mouse Y");
@@ -85,6 +94,16 @@ public class Character_Move : MonoBehaviour
         //Cursor the player actually follows movement
         mouseCursor.transform.position = Camera.main.ScreenToWorldPoint(mousePosCor);
         mouseCursor.transform.position = new Vector3(mouseCursor.transform.position.x, mouseCursor.transform.position.y, 0f);
+    }
+
+    private void updateAndShowSensitivity()
+    {
+        sensitivityUI.GetComponent<TextMeshProUGUI>().text = "Sensitivity : " + mouseSensValue.ToString();
+
+        Color myColor = sensitivityUI.color;
+        myColor.a = 1f;
+
+        sensitivityUI.color = myColor;
     }
 
     void showCursor ()
@@ -112,7 +131,7 @@ public class Character_Move : MonoBehaviour
         {
             Vector3 mouseDirection = Vector3.Normalize(mouseCursor.transform.position - transform.position);
 
-            if ((Time_Lord.Acting && !dead))
+            if ((Time_Lord.Acting && !dead && !cannotMove))
             {
                 if (Vector3.Distance(mouseCursor.transform.position, transform.position) >= 0.5f)
 
@@ -129,7 +148,7 @@ public class Character_Move : MonoBehaviour
     {
         if (!mouseMoving)
         {
-            if ((Time_Lord.Acting && !dead))
+            if ((Time_Lord.Acting && !dead && !cannotMove))
             {
                 if (Mathf.Abs(Input.GetAxis("Vertical")) >= 0.01f)
                 {
@@ -150,7 +169,7 @@ public class Character_Move : MonoBehaviour
     {
         if (mouseMoving)
         {
-            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead)
+            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead && !cannotMove)
             {
                 Vector3 mouseDirection = Vector3.Normalize(mouseCursor.transform.position - transform.position);
                 float angle = Vector3.SignedAngle(mouseDirection, -transform.up, -Vector3.forward);
@@ -177,7 +196,7 @@ public class Character_Move : MonoBehaviour
     {
         if (!mouseMoving)
         {
-            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead)
+            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead && !cannotMove)
             {
                 Vector3 keyboardDirection = Vector3.Normalize(new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"),0));
                 float angle = Vector3.SignedAngle(keyboardDirection, -transform.up, -Vector3.forward);
@@ -203,7 +222,7 @@ public class Character_Move : MonoBehaviour
         {
             Vector3 mouseDirection = Vector3.Normalize(mouseCursor.transform.position - transform.position);
 
-            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead)
+            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead && !cannotMove)
             {
                 bool up = false, left = false, down = false, right = false;
 
@@ -240,7 +259,7 @@ public class Character_Move : MonoBehaviour
     {
         if (!mouseMoving)
         {
-            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead)
+            if (Time_Lord.Acting && !Time_Lord.Transitioning && !dead && !cannotMove)
             {
                 bool up = false, left = false, down = false, right = false;
 
@@ -326,7 +345,7 @@ public class Character_Move : MonoBehaviour
 
     public void Reset_Character()
     {
-        if (!dead)
+        if (!dead && !cannotMove)
         {
             Kill();
         }

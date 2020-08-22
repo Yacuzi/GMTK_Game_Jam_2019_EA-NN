@@ -108,7 +108,7 @@ public class Level_Manager : MonoBehaviour
                 The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 5;
             else
             {
-                The_Character.GetComponent<Character_Move>().dead = true;
+                The_Character.GetComponent<Character_Move>().cannotMove = true;
                 drippingObject.SetActive(true);
                 The_Character.GetComponent<Character_Move>().speed = The_Character.GetComponent<Character_Move>().speed / 10;
             }
@@ -185,17 +185,13 @@ public class Level_Manager : MonoBehaviour
         return;
     }
 
-    void DeleteSave ()
+    public void DeleteSave ()
     {
-        if (Input.GetKeyDown(KeyCode.D) && Input.GetKeyDown(KeyCode.L))
-        {
             PlayerPrefs.SetInt("Level", 0);
             PlayerPrefs.SetInt("Deaths", 0);
             PlayerPrefs.SetFloat("TimeBender", 1f);
-            PlayerPrefs.SetFloat("Sensitivity", 0f);
+            PlayerPrefs.SetFloat("Sensitivity", 50);
             transitionSound.Play();
-            Application.Quit();
-        }
     }
 
     void ChangeFullScreen()
@@ -238,7 +234,12 @@ public class Level_Manager : MonoBehaviour
 
     private void Update()
     {
-        DeleteSave();
+
+        if (Input.GetKeyDown(KeyCode.D) && Input.GetKeyDown(KeyCode.L))
+        {
+            DeleteSave();
+        }
+
         ChangeFullScreen();
 
         if (loadMyScene && !transitionSound.isPlaying)

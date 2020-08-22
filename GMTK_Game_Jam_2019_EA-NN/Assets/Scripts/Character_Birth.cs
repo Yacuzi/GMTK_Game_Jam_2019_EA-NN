@@ -57,12 +57,12 @@ public class Character_Birth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Time.time >= 5f)
+        if (Time.timeSinceLevelLoad >= 5f)
         {
             fadeTitle();
         }
 
-        if (Time.time >= 10f && !playOnce)
+        if (Time.timeSinceLevelLoad >= 10f && !playOnce)
         {
             playOnce = true;
 

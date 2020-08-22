@@ -44,7 +44,7 @@ public class Dripping : MonoBehaviour
 
             if (undead)
             {
-                theBlob.GetComponent<Character_Move>().dead = false;
+                theBlob.GetComponent<Character_Move>().cannotMove = false;
                 this.gameObject.SetActive(false);
             }
         }

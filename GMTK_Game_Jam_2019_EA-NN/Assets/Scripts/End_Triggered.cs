@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class End_Triggered : MonoBehaviour
 {
@@ -10,8 +12,14 @@ public class End_Triggered : MonoBehaviour
     public CinemachineVirtualCamera myCamera;
     public Character_Move myCharacter;
     public GameObject mouseImage;
+    public GameObject endingScoreboard;
 
-    private bool ending, onlyOnce;
+    public Level_Manager theLevelManager;
+    public Character_Move theCharacterMove;
+
+    public TextMeshProUGUI deathTotal, endType;
+
+    private bool ending, onlyOnce, canInputEnd;
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -38,21 +46,43 @@ public class End_Triggered : MonoBehaviour
         }
         else
         {
-            Debug.Log("That's it! I quit!");
-            Application.Quit();
-        }
-    }
+            deathTotal.GetComponent<TextMeshProUGUI>().text = theCharacterMove.nbDeath.ToString();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+            if (theCharacterMove.nbDeath > 10)
+            {
+                endType.GetComponent<TextMeshProUGUI>().text = "1 / 2 NORMAL";
+            }
+            else
+            {
+                endType.GetComponent<TextMeshProUGUI>().text = "2/ 2 SPECIAL";
+            }
+
+            endingScoreboard.SetActive(true);
+            canInputEnd = true;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         if (ending)
+        {
             EndGame();
+        }
+
+        if (canInputEnd)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                theLevelManager.DeleteSave();
+                theLevelManager.resetStatic();
+                SceneManager.LoadScene(0);
+            }
+        }
     }
 }
